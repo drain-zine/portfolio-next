@@ -1,4 +1,4 @@
-$sidebarWidth: 20%;
+$sidebarWidth: 35%;
 $leftContentPadding: 75px;
 
 .main{
@@ -18,7 +18,7 @@ $leftContentPadding: 75px;
     flex: 0 0 $sidebarWidth;
 }
 
-.header{
+.header, .footer{
     position: relative;
     height: 100vh;
 
@@ -43,7 +43,7 @@ $leftContentPadding: 75px;
 }
 
 .contents{
-    margin-left: auto;
+    margin-left: calc(100% - 30rem - 5rem);
     padding-right: 7.5rem;
-    float: right;
+    margin-bottom: 5rem;
 }

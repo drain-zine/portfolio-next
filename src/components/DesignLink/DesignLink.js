@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './DesignLink.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/fontawesome-free-regular'
+
 
 const DesignLink = ({index, title, description, date}) => {
     return (
@@ -9,12 +11,13 @@ const DesignLink = ({index, title, description, date}) => {
                 <h3>{index}</h3>
             </section>
             <section className={styles.information}>
-                <span className={styles.title}>{title}</span>
-                <span className={styles.separator}>
-                    <FontAwesomeIcon icon={regular('circle')} />
-                </span>
-                <span>{date}</span>
-                <span></span>
+                <div className={styles.title}>
+                    <h4>{title}</h4>
+                    <span className={styles.separator}>
+                        <FontAwesomeIcon className={styles.icon} icon={faCircle} />
+                    </span>
+                <span className={styles.date}>{date}</span>
+                </div>
                 <div>{description.map(p => 
                         <p>{p}</p>
                     )}

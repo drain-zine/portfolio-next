@@ -1,4 +1,6 @@
 $width: 30rem;
+$borderMargin: 2rem;
+$titleOffset: 0.375rem;
 
 .designLink{
     position: relative;
@@ -7,29 +9,52 @@ $width: 30rem;
     display: flex;
     flex-direction: row;
     width: $width;
+    margin: 7.5rem 0;
+}
+
+.designLink:first-child{
+    margin: 0;
 }
 
 .sidebar{
     border-right: 1px solid black;
     flex: 0 0 50%;
     display: flex;
-    justify-content: center;
 
     h3{
         font-size: 3rem;
         margin-top: 0;
+        margin-left: auto;
+        margin-right: $borderMargin;
     }
 }
 
 .information{
-    padding-left: 2rem;
+    padding-left: $borderMargin;
     flex: 0 0 50%;
 }
 
 .title{
-    font-size: 2rem;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    h4{
+        font-size: 2rem;
+        margin: 0;
+    }
+   
+}
+
+.icon{
+    width: 0.75rem;
+}
+
+.date{
+    margin-top: $titleOffset;
 }
 
 .separator{
-    width: 5%;
+    margin: calc($titleOffset + 0.25rem) 0.75rem 0 0.75rem;
 }
