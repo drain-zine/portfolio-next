@@ -1,0 +1,49 @@
+$sidebarWidth: 20%;
+$leftContentPadding: 75px;
+
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.mainContent{
+    color: black;
+    background-color: white;
+    flex: 0 0 calc(100% - $sidebarWidth);
+}
+
+.sidebar{
+    color: white;
+    background-color: black;
+    flex: 0 0 $sidebarWidth;
+}
+
+.header{
+    position: relative;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    padding-left: $leftContentPadding;
+}
+
+.headerContent{
+    display: flex;
+    flex-direction: column;
+
+    p{
+        margin: 0;
+    }
+
+    h3{
+        margin: 0;  
+        margin: 8px 0;
+        font-size: 3 * 1rem;
+    }
+}
+
+.contents{
+    margin-left: auto;
+    padding-right: 7.5rem;
+    float: right;
+}
