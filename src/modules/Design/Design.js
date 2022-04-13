@@ -21,6 +21,7 @@ const LandingPage = () => (
                         'This is a longer bit of text I am scratching my head really'
                     ]}
                     index={'0'}
+                    link={'https://knowyourmeme.com/memes/ligma'}
                 />
 
                 <DesignLink 
@@ -54,9 +55,7 @@ const LandingPage = () => (
                 </div>
             </footer>
         </section>
-        <section className={styles.sidebar}>
-
-        </section>
+        <section className={styles.sidebar} />
     </main>
 );
 

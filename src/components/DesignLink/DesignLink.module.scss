@@ -36,6 +36,7 @@ $titleOffset: 0.375rem;
 
 .title{
     font-size: 1rem;
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,4 +58,20 @@ $titleOffset: 0.375rem;
 
 .separator{
     margin: calc($titleOffset + 0.25rem) 0.75rem 0 0.75rem;
+}
+
+.shadowLink{
+    color: white;
+    position: absolute;
+    margin: 0;
+    left: 20rem;
+}
+
+.hover{
+    color: white;
+    transition: color 0.3s ease;
+    &:hover{
+        color: darkred;
+    }
+    cursor: pointer;
 }
