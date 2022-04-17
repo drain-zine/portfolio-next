@@ -17,8 +17,13 @@
 }
 
 html, body{
+    overflow-x: hidden;
     margin: 0;
     font-weight: 'light';
     font-size: 16px;
     font-family: 'UCity', Courier, Helvetica, sans-serif;
+}
+
+body{
+    overflow-y: hidden; // sidebar anim adds scroll so disable here
 }

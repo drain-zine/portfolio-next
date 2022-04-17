@@ -1,9 +1,29 @@
 import DesignLink from '../../components/DesignLink/DesignLink';
 import styles from './Design.module.scss';
+import { motion } from 'framer-motion';
+import { variants } from '../../animations/fadeOut';
+import { variants as staggerVariants } from '../../animations/stagger';
+
+const leftSlide = {
+    initial: {x: "-100%", scale: 3},
+    in: {x: 0, scale: 1},
+    out: {x: "-71.35%", scale: 2.42857142857, transition: {ease: "easeInOut"}}
+}
+
 
 const LandingPage = () => (
-    <main className={styles.main}>
-        <section className={styles.mainContent}>
+    <motion.main 
+        className={styles.main}
+        variants={staggerVariants}
+        initial={'initial'}
+        animate={'in'}
+        exit={'out'}
+    >
+        <motion.section 
+            className={styles.mainContent}
+            variants={variants}
+        >
+            <p className = {styles.ver}>Version ${process.env.REACT_APP_VERSION}</p>
             <header className = {styles.header}>
                 <div className = {styles.headerContent}>
                     <h3 className={styles.title}>Design</h3>
@@ -54,9 +74,13 @@ const LandingPage = () => (
                     <p>Some projects random text ahhh roland suck me please</p>
                 </div>
             </footer>
-        </section>
-        <section className={styles.sidebar} />
-    </main>
+        </motion.section>
+        <motion.section 
+            className={styles.sidebar} 
+            variants={leftSlide}
+            transition={{duration: 0.7}}
+        />
+    </motion.main>
 );
 
 export default LandingPage;

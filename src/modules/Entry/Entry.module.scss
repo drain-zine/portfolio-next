@@ -3,33 +3,20 @@ $leftContentPadding: 75px;
 
 .main{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.mainContent{
+.titleWrapper{
     color: white;
     background-color: black;
     flex: 0 0 calc(100% - $sidebarWidth);
-}
-
-.sidebar{
-    color: black;
-    background-color: white;
-    flex: 0 0 $sidebarWidth;
-}
-
-.header, .footer{
-    position: relative;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
     padding-left: $leftContentPadding;
-}
 
-.headerContent{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
 
     p{
         margin: 0;
@@ -42,8 +29,62 @@ $leftContentPadding: 75px;
     }
 }
 
+.titleContent{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    margin-top: 50vh;
+
+    p{
+        margin-bottom: 1rem;
+    }
+}
+
+.subtitleContent{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 50%;
+}
+
+.sidebar{
+    color: black;
+    background-color: white;
+    flex: 0 0 $sidebarWidth;
+}
+
+$tileSpacer: 11rem;
+
 .contents{
-    margin-left: calc(100% - 30rem - 5rem);
+    width: 100%;
+    margin-top: 5rem;
+
+    margin-left: 15%;
     padding-right: 7.5rem;
-    margin-bottom: 5rem;
+    margin-bottom: $tileSpacer;
+}
+
+
+.tile{
+    width: 50%;
+    display: flex;
+    margin-bottom: $tileSpacer;
+
+    .text{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.leftText{
+    flex-direction: row;
+    border-right: 1px solid black;
+    padding-right: 5rem;
+}
+
+.rightText{
+    flex-direction: row-reverse;
+    border-left: 1px solid black;
+    padding-left: 5rem;
 }

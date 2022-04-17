@@ -1,0 +1,59 @@
+@import 'variables.scss';
+
+.main{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: $secondary;
+    color: $main
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    h1{
+        margin: 0;
+        font-size: 50vh;
+    }
+}
+
+.nav{
+    display: flex;
+    flex-direction: column-reverse;
+    transform: rotate(90deg);
+    position: absolute;
+    left: 60%;
+    top: 7.5%;
+    z-index: 1;
+
+    h3{
+        margin: 0;
+        font-size: 20vh;
+        cursor: pointer;
+
+        &:hover{
+            color: darkred;
+        }
+    }
+}
+
+.blackBackground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
