@@ -6,52 +6,9 @@ import SectionWSidebar from '../../components/SectionWSidebar/SectionWSidebar';
 import Image from 'next/image';
 import AVIndex from '../../assets/AvantVibes/AVindex.png'
 import classnames from 'classnames';
+import { TextTile, TextPictureTile, PictureTile } from '../../components/Tiles';
 
 const EntryPage = () => (
-    // <main className={styles.main}>
-    //     <section className={styles.sidebar} />
-    //     <section 
-    //         className={styles.mainContent} >
-    //         <motion.header 
-    //             className = {styles.header}
-    //             variants={variants}
-    //             initial={'initial'}
-    //             animate={'in'}
-    //             exit={'out'}
-    //         >
-    //             <div className = {styles.headerContent}>
-    //                 <h3 className={styles.title}>Ligma</h3>
-    //                 <p>Text here!</p>
-    //             </div>
-    //         </motion.header>
-    //         <motion.header 
-    //             className = {styles.header}
-    //             variants={variants}
-    //             initial={'initial'}
-    //             animate={'in'}
-    //             exit={'out'}
-    //         >
-    //             <div className = {styles.headerContent}>
-    //                 <h3 className={styles.title}>Ligma</h3>
-    //                 <p>Text here!</p>
-    //             </div>
-    //         </motion.header>
-    //         <motion.header 
-    //             className = {styles.header}
-    //             variants={variants}
-    //             initial={'initial'}
-    //             animate={'in'}
-    //             exit={'out'}
-    //         >
-    //             <div className = {styles.headerContent}>
-    //                 <h3 className={styles.title}>Ligma</h3>
-    //                 <p>Text here!</p>
-    //             </div>
-    //         </motion.header>
-    //         <section className={styles.contents}>
-    //         </section>
-    //     </section>
-    // </main>
     <main className={styles.main}>
         <SectionWSidebar sidebarLeft={true} mainColour="black" sidebarWidth="15%">
             <div className = {styles.titleWrapper}>
@@ -61,27 +18,39 @@ const EntryPage = () => (
                     <h4>Project Started: 2019</h4>
                 </div>
                 <div className={styles.subtitleContent}>
-
+                <div className={styles.sideText}>
+                    <h3>Digital Thoughts</h3>
+                    <p>An experiment in sound</p> 
+            </div>
                 </div>
             </div>
+
         </SectionWSidebar>
         <section className={styles.contents}>
-            <div className={classnames(styles.tile, styles.leftText)}>
-                <div className={styles.text}> { /* left Text tile*/}
-                    <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
-                    <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
-                </div>
-                
-                <Image src={AVIndex}></Image>
-            </div>
+            <PictureTile imgSrc={AVIndex} />
+            {/* <TextPictureTile imgSrc={AVIndex}>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+                <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
+            </TextPictureTile>
 
-            <div className={classnames(styles.tile, styles.rightText)}> { /* right Text tile*/}
-                <Image src={AVIndex}></Image>
-                <div className={styles.text}> 
-                    <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
-                    <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
-                </div>
-            </div>
+            <TextPictureTile textPos={'right'} imgSrc={AVIndex}>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+                <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
+            </TextPictureTile>
+
+            <TextTile>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+                <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+            </TextTile> 
+
+            <TextTile textDir={'row'}>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+                <p>The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
+                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies.</p>
+            </TextTile>  */}
+
+           
         </section>
     </main>
 );

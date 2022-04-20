@@ -1,0 +1,72 @@
+$tileSpacer: 11rem;
+
+.tile{
+    width: 50%;
+    display: flex;
+    margin-bottom: $tileSpacer;
+
+    .text{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.TextPictureTile{
+    &.left{
+        flex-direction: row;
+        border-right: 1px solid black;
+        padding-right: 5rem;
+    }
+    
+    &.right{
+        flex-direction: row-reverse;
+        border-left: 1px solid black;
+        padding-left: 5rem;
+
+        .text{
+            text-align: right;
+        }
+    }
+}
+
+.TextTile{
+    display: flex;
+
+    &.column{
+        flex-direction: row;
+
+        .colWrapper:not(:last-child){
+            border-right: 1px solid black;
+        }
+    }
+
+    &.row{
+        flex-direction: column;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+
+        .colWrapper:first-child{
+            padding-top: 5rem;
+        }
+
+        .colWrapper:last-child{
+            padding-bottom: 5rem;
+        }
+
+        p{
+            margin: 0.5rem;
+        }
+    }
+        
+    .colWrapper{
+        flex: 1;
+        padding: 0 2rem;
+    }
+
+}
+
+.PictureTile{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0 5rem;
+}

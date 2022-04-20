@@ -41,6 +41,21 @@ $leftContentPadding: 75px;
     }
 }
 
+.sideText{
+    display: flex;
+    flex-direction: column;
+    transform: rotate(90deg);
+    margin-top: 7.5rem;
+
+    h3{
+        width: 100%;
+        font-size: 4rem;
+    }
+    p{
+        margin-left: auto;
+    }
+}
+
 .subtitleContent{
     display: flex;
     flex-direction: row;
