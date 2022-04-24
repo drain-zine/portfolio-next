@@ -33,10 +33,10 @@ const Home = () => {
                     <Link
                         href='/design'
                     >
-                        <h3>Design</h3>
+                        <h3>design</h3>
                     </Link>
-                    <h3>Other</h3>
-                    <h3>Details</h3>
+                    <h3>other</h3>
+                    <h3>details</h3>
                 </div>
             </motion.section>
             <motion.section

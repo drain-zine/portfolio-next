@@ -73,7 +73,7 @@ $tileSpacer: 11rem;
 
 .contents{
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 10rem;
 
     margin-left: 15%;
     padding-right: 7.5rem;
@@ -102,4 +102,107 @@ $tileSpacer: 11rem;
     flex-direction: row-reverse;
     border-left: 1px solid black;
     padding-left: 5rem;
+}
+
+.centralImg{
+    margin-left: -7.5%;
+    margin-bottom: 10rem;
+    position: relative;
+}
+
+.sideText2{
+    color: red;
+    display: flex;
+    flex-direction: column;
+    transform: rotate(90deg);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    h3{
+        width: 100%;
+        font-size: 6rem;
+    }
+    p{
+        margin-left: auto;
+    }
+}
+
+.scrollingText{
+    position: fixed;
+    width: 100vh;
+    top: 50%;
+    left: 0;
+    transform: rotate(-90deg) translate(-42%,0);
+    text-align: center;
+    transform-origin: 0;
+
+    h3{
+        margin: 0;
+        font-size: 12rem;
+    }
+}
+
+.tempTile{
+    width: 100%;
+    display: flex;
+    position: relative;
+    margin-bottom: 10rem;
+
+    .tempText{
+        width: 15%;
+        font-size: 1rem;
+        p{
+            margin-top: 0;
+        }
+    }
+
+    .tempTextVert{
+        width: 75%;
+        font-size: 0.9rem;
+        display: flex;
+        margin-left: -7.5%
+        p{
+            flex: 1;
+            margin-top: 0;
+        }
+    }
+
+    .tempText2{
+        width: 15%;
+        p{
+            margin-top: 0;
+        }
+    }
+
+    .tempImg{
+        position: relative;
+        padding-left: 2.5rem;
+    }
+
+    .tempImg2{
+        position: relative;
+        margin-right: 2.5rem;
+        border: 1px solid #0000003d;
+    }
+
+    .tempImg3{
+        position: relative;
+        width: 85%;
+        margin-left: 2.5rem;
+    }
+
+    .tempImg35{
+        position: relative;
+        width: 85%;
+        margin-right: 2.5rem;
+    }
+
+    .tempImg4{
+        position: relative;
+        margin-right: 2.5rem;
+        border: 1px solid #0000003d;
+        display: flex;
+        flex-direction: column;
+    }
 }
