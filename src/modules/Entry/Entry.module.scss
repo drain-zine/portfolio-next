@@ -56,6 +56,39 @@ $leftContentPadding: 75px;
     }
 }
 
+.nav{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
+    .spacer{
+        width: 85%;
+    }
+    .controls{
+        width: 15%;
+        display: flex;
+        flex-direction: column;
+
+        h3{
+            margin: auto 0;
+            font-size: 6rem;
+            transform: rotate(90deg);
+        }
+
+        p{
+            margin: 0;
+            transform: rotate(90deg); 
+        }
+    }
+}
+
+// .sideText{
+//     position: fixed;
+//     width: 100vh;
+//     height: 100vh;
+// }
+
 .subtitleContent{
     display: flex;
     flex-direction: row;
@@ -73,136 +106,97 @@ $tileSpacer: 11rem;
 
 .contents{
     width: 100%;
-    margin-top: 10rem;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
+    font-size: 0.9rem;
 
-    margin-left: 15%;
-    padding-right: 7.5rem;
-    margin-bottom: $tileSpacer;
-}
+    div{
+        //border-left: 1px solid black;
 
-
-.tile{
-    width: 50%;
-    display: flex;
-    margin-bottom: $tileSpacer;
-
-    .text{
-        display: flex;
-        flex-direction: column;
+        p{
+            margin: 0;
+            padding: 1rem;
+        }
     }
-}
 
-.leftText{
-    flex-direction: row;
-    border-right: 1px solid black;
-    padding-right: 5rem;
-}
+    .sideBar{
+       // background-color: red;
+        .sideText{
+            transform: rotate(90deg);
+            font-size: 6rem;
+            margin: 0;
+        }
+    }
 
-.rightText{
-    flex-direction: row-reverse;
-    border-left: 1px solid black;
-    padding-left: 5rem;
-}
+    // .sideBar:first-child{
+    //     border-right: 1px solid black;
+    // }
 
-.centralImg{
-    margin-left: -7.5%;
-    margin-bottom: 10rem;
-    position: relative;
-}
+    // .sideBar:last-child{
+    //     border-left: 1px solid black;
+    // }
 
-.sideText2{
-    color: red;
-    display: flex;
-    flex-direction: column;
-    transform: rotate(90deg);
-    position: absolute;
-    bottom: 0;
-    left: 50%;
+    .doubleColumn{
+        grid-column: span 2;
+    }
 
-    h3{
+    .spread{
+        grid-column: span 5;
+    }
+
+    .halfColSpacer{
+        height: 50vh;
+    }
+
+    .blackBar{
+        height: 151.91px;
         width: 100%;
-        font-size: 6rem;
-    }
-    p{
-        margin-left: auto;
+        background-color: black;
     }
 }
 
-.scrollingText{
-    position: fixed;
-    width: 100vh;
-    top: 50%;
-    left: 0;
-    transform: rotate(-90deg) translate(-42%,0);
-    text-align: center;
-    transform-origin: 0;
+.contentsFitToHeight{
+    @extend .contents;
+    height: max-content;
+}
+
+.contentsHalfHeight{
+    @extend .contents;
+    height: 50vh;
+}
+
+.quoteBars{
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: right;
 
     h3{
         margin: 0;
-        font-size: 12rem;
+        font-size: 6rem;
+    }
+
+    h3:first-child{
+        background-color: darkred;
+    }
+    h3:last-child{
+        background-color: darkgoldenrod;
     }
 }
 
-.tempTile{
-    width: 100%;
-    display: flex;
+.rotatedTitle{
+    position: absolute;
+    top: 0;
+    font-size: 6rem;
+    color: darkgoldenrod;
+    transform: rotate(-90deg);
+}
+
+.relative{
     position: relative;
-    margin-bottom: 10rem;
+}        
 
-    .tempText{
-        width: 15%;
-        font-size: 1rem;
-        p{
-            margin-top: 0;
-        }
-    }
-
-    .tempTextVert{
-        width: 75%;
-        font-size: 0.9rem;
-        display: flex;
-        margin-left: -7.5%
-        p{
-            flex: 1;
-            margin-top: 0;
-        }
-    }
-
-    .tempText2{
-        width: 15%;
-        p{
-            margin-top: 0;
-        }
-    }
-
-    .tempImg{
-        position: relative;
-        padding-left: 2.5rem;
-    }
-
-    .tempImg2{
-        position: relative;
-        margin-right: 2.5rem;
-        border: 1px solid #0000003d;
-    }
-
-    .tempImg3{
-        position: relative;
-        width: 85%;
-        margin-left: 2.5rem;
-    }
-
-    .tempImg35{
-        position: relative;
-        width: 85%;
-        margin-right: 2.5rem;
-    }
-
-    .tempImg4{
-        position: relative;
-        margin-right: 2.5rem;
-        border: 1px solid #0000003d;
-        display: flex;
-        flex-direction: column;
-    }
+.extend{
+    display: flex;
+    width: 150%;
 }

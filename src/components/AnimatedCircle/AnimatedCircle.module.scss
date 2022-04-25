@@ -1,0 +1,40 @@
+.animateableContainer{
+    position: relative;
+}
+
+.circleContainer{
+    border-radius: 50%;
+
+    circle{
+        fill: none;
+        stroke: black;
+        stroke-width: 3;
+        stroke-dasharray: 86 100;
+    }
+
+    .circle:last-child{
+        stroke-width: 1;
+    }
+}
+
+.lineContainer{
+    position: absolute;
+    height: 100vh;
+    transform: translate(-18.55%, -80%);
+    top: 0;
+    left: 0;
+
+    line{
+        stroke: black;
+        stroke-width: 0.3;
+    }
+}
+
+.lineContainerRotate{
+    @extend .lineContainer;
+    transform: translate(18.55%, -80%);
+    line{
+        stroke: darkred;
+        stroke-width: 0.6;
+    }
+}
