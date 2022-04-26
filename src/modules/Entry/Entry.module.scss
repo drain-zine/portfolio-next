@@ -200,3 +200,79 @@ $tileSpacer: 11rem;
     display: flex;
     width: 150%;
 }
+
+.black{
+    background: black;
+}
+
+.halfBackground{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    z-index: 1
+}
+
+.left{
+    left: 0;
+}
+.right{
+    right: 0;
+}
+
+.overflow{
+    width: 200%;
+    transform: translate(-50%);
+    color: white;
+    position: relative;
+    z-index: 4
+}
+
+.overflowLeft{
+    @extend .overflow;
+    transform: translate(0%);
+}
+
+.centralImgContainer{
+    top: 0;
+    width: 250%;
+    transform: translate(-30%);
+    left: 50%;
+    z-index: 2;
+    height: 100%;
+    overflow: hidden;
+
+    .span{
+        z-index: 2;
+    }
+}
+
+.animatableReveal{
+    z-index: 3;
+    height: 100%;
+    background: black;
+    position: relative;
+}
+
+.interactText{
+    cursor: pointer;
+    color: white;
+    background: black;
+    padding: 0 0.2rem;
+    margin: 0;
+
+    &:hover{
+        color: red;
+    }
+}
+
+.halfBlackR{
+    background: linear-gradient(90deg, white 0%, transparent 50%);
+    position: relative;
+}
+
+.halfBlackL{
+    background: linear-gradient(90deg, transparent 0%, white 50%);
+    position: relative;
+}
