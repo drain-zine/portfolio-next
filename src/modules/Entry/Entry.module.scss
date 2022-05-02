@@ -276,3 +276,53 @@ $tileSpacer: 11rem;
     background: linear-gradient(90deg, transparent 0%, white 50%);
     position: relative;
 }
+
+$barHeight: 12.5%;
+
+.imgBox{
+    width: 301%;
+    transform: translate(-66.666%);
+    height: 100%;
+
+    .imgContainer{
+        position: absolute;
+        top: calc(50% + $barHeight);
+        left: 50%;
+        transform: translate(-50%, calc(-50% - $barHeight));
+        width: 450px;
+    }
+}
+
+.topBar{
+    position: absolute;
+    width: 100%;
+    height: $barHeight;
+    background: black;
+}
+
+.subsubtitle{
+    color: white;
+    font-size: 3rem;
+    position: absolute;
+    transform: rotate(-90deg);
+    margin: 0;
+    left: -20%;
+    top: 70%;
+}
+
+.sMainWrapper{
+    position: absolute;
+    top: 70%;
+    left: 0;
+    height: 500px;
+    width: 100%;
+    transform: translate(0,-70%);
+}
+
+.verticalMarquee{
+    transform: rotate(-90deg);
+
+    h3{
+        font-size: 2rem;
+    }
+}

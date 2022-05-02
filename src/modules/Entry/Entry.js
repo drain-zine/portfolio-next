@@ -15,6 +15,8 @@ import classnames from 'classnames';
 import { TextTile, TextPictureTile, PictureTile } from '../../components/Tiles';
 import AnimatedCircle from '../../components/AnimatedCircle/AnimatedCircle';
 import classNames from 'classnames';
+import Marquee from 'react-fast-marquee';
+import HoverGallery from '../../components/HoverGallery/HoverGallery';
 
 // import dynamic from 'next/dynamic'
 
@@ -65,7 +67,7 @@ const EntryPage = () => {
                 </div>
 
             </SectionWSidebar>
-            <Image width={'1080px'} src={AVIndex}/>
+            <HoverGallery width={'100vw'} src={[AVIndex, AVArchive, AVLinks]}/>
                     
             <section className={styles.contents}>
                 <section className={styles.sideBar}/>
@@ -100,20 +102,26 @@ const EntryPage = () => {
                             transition={{duration: 0.8, type: 'spring', stiffness: 400, damping: 90 }}
                         />
                         <Image src={SupremeMain} layout={'fill'} />
+                        
                     </div>
                    
                 </div>
                 <div className={styles.relative}>
                     <div className={classnames(styles.halfBlackL)}/>
+                    <h3 className={styles.subsubtitle}>References</h3>
                 </div>
                 {/* <div className={styles.doubleColumn}>
                     <div>
                         <Image width={'380px'} src={SupremeMain}/>
                     </div>
                 </div> */}
-                <div>
+                <div className={styles.relative}>
+                    <div className={styles.sMainWrapper}>
+                    <Image src={SupremeMain} layout={'fill'} />
+                    </div>
+                    
                 </div>
-                <section className={styles.sideBar}/>
+                <section className={styles.sideBar} />
                 
             </section>
             <section className={styles.contents}>
@@ -126,9 +134,13 @@ const EntryPage = () => {
                         <AnimatedCircle />
                     </div>
                 </div> */}
-                <div></div>
+                <div/>
                 <div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ligula leo, accumsan a nulla ac, elementum tincidunt magna.</p>
+                <div  className={classnames(styles.relative, styles.verticalMarquee)}>
+                    <Marquee gradient={false} direction={'right'}>
+                        <h3>Lorem Ipsum</h3>
+                    </Marquee>
+                    </div>
                 </div>
                 <div style={{backgroundColor: 'black'}}></div>
                 <div className={styles.relative}>
@@ -146,7 +158,7 @@ const EntryPage = () => {
                 </div>
                 <section className={styles.sideBar}/>
             </section>
-            <section className={styles.contentsFitToHeight}>
+            {/* <section className={styles.contentsFitToHeight}>
                 <section className={styles.sideBar}/>
                 <div className={styles.doubleColumn}>
                     <Image width={'576px'} height={'576px'} src={WarcraftIndex}/>
@@ -157,17 +169,6 @@ const EntryPage = () => {
                 </div>
                 <section className={styles.sideBar}/>
             </section>
-            {/* <section className={styles.contentsHalfHeight}>
-                <section className={styles.sideBar}/>
-                <div className={styles.spread}>
-                    <div className={styles.quoteBars}>
-                        <h3>the dialectic</h3>
-                        <h3>of simplicity</h3>
-                        <h3>and chaos </h3>
-                    </div>
-                </div>
-                <section className={styles.sideBar}/>
-            </section> */}
             <section className={styles.contents}>
                 <section/>
                 <div className={classnames(styles.doubleColumn, styles.extend)}>
@@ -184,7 +185,7 @@ const EntryPage = () => {
                 <div/>
                 <div/>
                 <section/>
-            </section>
+            </section> */}
 
             {/* <Image width={'1080px'} src={AVLinks}/> */}
             

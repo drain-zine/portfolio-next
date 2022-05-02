@@ -1,0 +1,12 @@
+.galleryContainer{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    cursor: none;
+    z-index: 10;
+
+    div{
+        z-index: 20;
+        flex: 1 1 33%;
+    }
+}

@@ -1,12 +1,47 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from '../styles/index.module.scss'
 import { variants } from '../animations/fadeOut';
 import { staggerVariants } from '../animations/stagger';
 import { motion } from 'framer-motion';
+import { Canvas, useThree } from '@react-three/fiber';
+import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 
 const slideVariants=  {
     out: { x: '65%' }
+};
+
+
+const generateRandom = (min, max) => {
+    return Array.from({length: 3}, () => Math.round(Math.random() * (max - min) + min));
+}
+
+const getRandomPos = () => {
+    return generateRandom(-2, 10);
+}
+
+const Scene = () => {
+
+
+    return(
+        <Canvas  gl={{ antialias: true }}>
+            <PerspectiveCamera makeDefault position={[15, 15, 15]} fov={50} aspect={1536 / 721.6} near={1} far={1000}/>
+            <OrbitControls enableZoom={true} enableRotate={true} enableDamping={true} dampingFactor={0.1} rotateSpeed={0.1} />
+            <group>
+                <group position={getRandomPos()} scale={[1, 2, 1]} rotation={[Math.PI / 2, 0, 0]}>
+                    <sprite position={getRandomPos()} scale={[10, 2, 3]} center={[-0.1, 0]}>
+                        <spriteMaterial color={'darkred'} rotation={Math.PI / 3}></spriteMaterial>
+                    </sprite>
+                </group>
+                <sprite position={getRandomPos()} scale={[2,10,1]}>
+                    <spriteMaterial color={'#000'}></spriteMaterial>
+                </sprite>
+                <sprite position={getRandomPos()} scale={[0.1, 0.5, 0.1]} center={[0.5, 0]}>
+                    <spriteMaterial color={'darkgoldenrod'} rotation={Math.PI / 3 * 4} sizeAttenuation={false}></spriteMaterial>
+                </sprite>
+            </group>
+        </Canvas>
+    );
 };
 
 const Home = () => {
@@ -18,90 +53,27 @@ const Home = () => {
             animate={'in'}
             exit={'out'}
         >
-            <motion.div 
-                className={styles.animatableContainer}
-                variants={staggerVariants}
-            >
-                {/* <div className={styles.line}/> */}
-                <motion.section 
-                className={styles.nav}
-                            variants={staggerVariants}>
-                    <motion.h3
-                        variants={variants}
-                    >
-                        contents</motion.h3>
-                    <motion.div className={styles.links}>
-                        <Link
-                            href='/design'
-                        >
-                            <motion.h3
-                                variants={variants}
-                            >
-                                design</motion.h3>
-                        </Link>
-                        <motion.h3                        
-                            variants={variants}
-                        >
-                            digital posters</motion.h3>
-                        <motion.h3                        
-                            variants={variants}
-                        >
-                            details</motion.h3>
-                    </motion.div>
-                </motion.section>
-                <svg className={styles.circleSvg} width="100%" height="100%" viewBox="0 0 100vw 100vh">
-                    <defs>
-                        <g id="lines">
-                            <motion.line
-                                variants={{
-                                    in: {x: '0%'},
-                                    out: {x: '-100%'},
-                                    initial: {x: '0%'}
+            <motion.section className={styles.nav}>
+                <motion.div className={styles.horizLine}></motion.div>
+                <motion.div className={styles.verticalLine}></motion.div>
+                <h3>Tom Stannett</h3>
 
-                                }} 
-                                    // transition={{duration: 0.8 }}
-                                x1="0" 
-                                x2="100%" 
-                                y1="50%" 
-                                y2="50%" 
-                                strokeWidth="10" />
-                        </g>
-                        <circle className={styles.circle} id="circle" cx="15%" cy="15%" r="15%"/>
-                    </defs>
-                    <use href='#lines' stroke='white' fill='none'/>
-                    <mask id='mask'>
-                        <rect width="100%" height="100%" fill="white"/>
-                        <use href='#lines' stroke='black'/>
-                    </mask>
-                    <use href='#circle' fill='black' /*stroke='none'*//>
-                    <use href="#circle" fill="white" /* stroke='none' */ mask="url(#mask)"/>
-                </svg>
-            </motion.div>
-             <motion.section 
-                variants={variants}
-                className={styles.content}
-                >
-                {/* <div className={styles.title}>
-                    <h1>Tom</h1>
-                    <h1>Stannett</h1>
-                </div> */}
-                <div className={styles.title2}>
-                    <p>Tom Stannett</p>
-                </div>
-                {/*<div className={styles.nav}>
-                    <Link
-                        href='/design'
-                    >
-                        <h3>design</h3>
+                <motion.div className={styles.controls}>
+                    <Link href='/design'>
+                    <h4>Design</h4>
                     </Link>
-                    <h3>other</h3>
-                    <h3>details</h3>
-                </div> */}
-            </motion.section> 
-            <motion.section
-                        className={styles.blackBackground}
-                        variants={slideVariants}
-                    >
+                    <h4>Digital Posters</h4>
+                    <h4>Contact</h4>
+                </motion.div>
+
+                <motion.div className={styles.blurb}>
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae finibus lacus, eget dictum libero. Duis dapibus consequat dolor id lacinia. Nam et nisi at felis hendrerit dapibus vitae vel eros. Etiam ligula libero, viverra fermentum efficitur suscipit, aliquam pulvinar ipsum. Pellentesque consequat pretium augue, non efficitur nunc pulvinar ac.
+                    </p>
+                </motion.div>
+            </motion.section>
+            <motion.section className={styles.canvas}>
+                <Scene />
             </motion.section>
         </motion.main>
     );

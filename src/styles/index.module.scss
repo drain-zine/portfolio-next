@@ -3,15 +3,6 @@
 .main{
     width: 100vw;
     height: 100vh;
-    position: relative;
-    background-color: $secondary;
-    color: $main
-}
-
-.content{
-    width: 100%;
-    height: 100%;
-    position: relative;
 }
 
 .title{
@@ -22,6 +13,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    z-index: 0;
 
     h1{
         margin: 0;
@@ -29,62 +21,79 @@
     }
 }
 
+$canvasWidth: 75%;
+$ar: calc(100vw / 100vh);
 
-.blackBackground{
+.nav{
+    width: calc(100% - $canvasWidth);
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
+    z-index: 10;
 
-.animatableContainer{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-
-    z-index: 100;
-
-    .circle{
-        transform: translate(56%,30%);
-    }
-
-    .nav{
+    .controls{
         position: absolute;
-        top: 40%;
-        left: 72%;
+        top: 30%;
+        left: 70%;
+    }
+
+    h3{
+        position: absolute;
+        top: 17.5%;
+        left: 30%;
+        margin: 0;
+        font-size: 1.5rem;
         color: black;
+    }
+
+    h4:hover{
+        color: darkred;
+        cursor: pointer;
+    }
+
+    .blurb{
+        position: absolute;
+        top: 60%;
+        left: 100%;
+        width: 40%;
+        border-right: 2px solid black;
+        padding-right: 1rem;
         
-        h3{
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        p{
+            margin: 0;
+            font-size: 0.8rem;
         }
+    }
 
-        .links{
-            display: flex;
-            flex-direction: column;
-            color: red;
-            padding-left: 5rem;
 
-            h3{
-                margin: 0;
-            }
-
-            h3:hover{
-                cursor: pointer;
-                color: darkred;
-            }
-        }
+    h4{
+        font-size: 1rem;
     }
 }
 
-.title2{
+.canvas{
     position: absolute;
-    top: 51%;
-    left: 10%;
-    p{
-        margin: 0;
-        font-size: 2rem;
-    }
+    left: calc(100% - $canvasWidth);
+    top: 0;
+    width: $canvasWidth;
+    height: 100vh;
+}
+
+.horizLine{
+    position: absolute;
+    left: 0;
+    top: 15%;
+    height: 1%;
+    width: 75%;
+    background: black;
+}
+
+.verticalLine{
+    position: absolute;
+    left: 65%;
+    top: 0%;
+    height: 100%;
+    width: 1%;
+    background:darkred;
 }
