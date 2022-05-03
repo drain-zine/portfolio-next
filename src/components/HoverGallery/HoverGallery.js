@@ -20,8 +20,7 @@ const HoverGallery = ({src, width = '1080px'}) => {
                 <div key={`${id}_${i}`} 
                     onMouseEnter={() => setHoverImg(i)}
                     onClick={() => setBackgroundImg(i)}
-                >   
-                </div>
+                />
             ))}
         </div>
     );

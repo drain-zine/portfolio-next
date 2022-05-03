@@ -14,7 +14,7 @@ const ImageCursor = ({src, parentRef, debug = false, width='25vw'}) => {
     const timeout = 1250;
     const fadeTime = 0.5;
 
-    const [isIdle, setIsIdle] = useState(false)
+    const [isIdle, setIsIdle] = useState(true)
 
     useIdleTimer({
       timeout,

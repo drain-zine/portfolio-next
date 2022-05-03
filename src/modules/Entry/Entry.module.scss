@@ -56,50 +56,11 @@ $leftContentPadding: 75px;
     }
 }
 
-.nav{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-
-    .spacer{
-        width: 85%;
-    }
-    .controls{
-        width: 15%;
-        display: flex;
-        flex-direction: column;
-
-        h3{
-            margin: auto 0;
-            font-size: 6rem;
-            transform: rotate(90deg);
-        }
-
-        p{
-            margin: 0;
-            transform: rotate(90deg); 
-        }
-    }
-}
-
-// .sideText{
-//     position: fixed;
-//     width: 100vh;
-//     height: 100vh;
-// }
-
 .subtitleContent{
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 50%;
-}
-
-.sidebar{
-    color: black;
-    background-color: white;
-    flex: 0 0 $sidebarWidth;
 }
 
 $tileSpacer: 11rem;
@@ -109,7 +70,7 @@ $tileSpacer: 11rem;
     height: 100vh;
     display: grid;
     grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 
     div{
         //border-left: 1px solid black;
@@ -129,130 +90,6 @@ $tileSpacer: 11rem;
         }
     }
 
-    // .sideBar:first-child{
-    //     border-right: 1px solid black;
-    // }
-
-    // .sideBar:last-child{
-    //     border-left: 1px solid black;
-    // }
-
-    .doubleColumn{
-        grid-column: span 2;
-    }
-
-    .spread{
-        grid-column: span 5;
-    }
-
-    .halfColSpacer{
-        height: 50vh;
-    }
-
-    .blackBar{
-        height: 151.91px;
-        width: 100%;
-        background-color: black;
-    }
-}
-
-.contentsFitToHeight{
-    @extend .contents;
-    height: max-content;
-}
-
-.contentsHalfHeight{
-    @extend .contents;
-    height: 50vh;
-}
-
-.quoteBars{
-    display: flex;
-    flex-direction: column-reverse;
-    text-align: right;
-
-    h3{
-        margin: 0;
-        font-size: 6rem;
-    }
-
-    h3:first-child{
-        background-color: darkred;
-    }
-    h3:last-child{
-        background-color: darkgoldenrod;
-    }
-}
-
-.rotatedTitle{
-    position: absolute;
-    top: 0;
-    font-size: 6rem;
-    color: darkgoldenrod;
-    transform: rotate(-90deg);
-}
-
-.relative{
-    position: relative;
-}        
-
-.extend{
-    display: flex;
-    width: 150%;
-}
-
-.black{
-    background: black;
-}
-
-.halfBackground{
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    z-index: 1
-}
-
-.left{
-    left: 0;
-}
-.right{
-    right: 0;
-}
-
-.overflow{
-    width: 200%;
-    transform: translate(-50%);
-    color: white;
-    position: relative;
-    z-index: 4
-}
-
-.overflowLeft{
-    @extend .overflow;
-    transform: translate(0%);
-}
-
-.centralImgContainer{
-    top: 0;
-    width: 250%;
-    transform: translate(-30%);
-    left: 50%;
-    z-index: 2;
-    height: 100%;
-    overflow: hidden;
-
-    .span{
-        z-index: 2;
-    }
-}
-
-.animatableReveal{
-    z-index: 3;
-    height: 100%;
-    background: black;
-    position: relative;
 }
 
 .interactText{
@@ -267,62 +104,6 @@ $tileSpacer: 11rem;
     }
 }
 
-.halfBlackR{
-    background: linear-gradient(90deg, white 0%, transparent 50%);
-    position: relative;
-}
-
-.halfBlackL{
-    background: linear-gradient(90deg, transparent 0%, white 50%);
-    position: relative;
-}
-
-$barHeight: 12.5%;
-
-.imgBox{
-    width: 301%;
-    transform: translate(-66.666%);
-    height: 100%;
-
-    .imgContainer{
-        position: absolute;
-        top: calc(50% + $barHeight);
-        left: 50%;
-        transform: translate(-50%, calc(-50% - $barHeight));
-        width: 450px;
-    }
-}
-
-.topBar{
-    position: absolute;
-    width: 100%;
-    height: $barHeight;
+.black{
     background: black;
-}
-
-.subsubtitle{
-    color: white;
-    font-size: 3rem;
-    position: absolute;
-    transform: rotate(-90deg);
-    margin: 0;
-    left: -20%;
-    top: 70%;
-}
-
-.sMainWrapper{
-    position: absolute;
-    top: 70%;
-    left: 0;
-    height: 500px;
-    width: 100%;
-    transform: translate(0,-70%);
-}
-
-.verticalMarquee{
-    transform: rotate(-90deg);
-
-    h3{
-        font-size: 2rem;
-    }
 }

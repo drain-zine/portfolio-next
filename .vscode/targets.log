@@ -8,12 +8,10 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Apr 23 13:11:54 2022
+# Make data base, printed on Mon May 02 23:27:09 2022
 
 # Variables
 
-# environment
-FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
 # environment
 SYSTEMDRIVE = C:
 # environment
@@ -23,7 +21,7 @@ USERPROFILE = C:\Users\invis
 # environment
 LOCALAPPDATA = C:\Users\invis\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-4ae7f7fa-5403-423c-90ad-0fa32c743c35-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-8e651183-f904-4044-9fed-d322d9e262d7-sock
 # environment
 VSCODE_CWD = C:\Program Files\Microsoft VS Code\_
 # environment
@@ -39,9 +37,7 @@ MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_16876_DBVFFMVPZINBTIKW
-# environment
-FPS_BROWSER_USER_PROFILE_STRING = Default
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_14644_BEMLINLCWLHEHSUK
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -93,7 +89,7 @@ MAKEFILE_LIST :=
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 16876
+VSCODE_PID = 14644
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -209,7 +205,7 @@ PROCESSOR_REVISION = a502
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
 # variable set hash-table stats:
-# Load=98/1024=10%, Rehash=0, Collisions=10/122=8%
+# Load=96/1024=9%, Rehash=0, Collisions=9/120=8%
 
 # Pattern-specific Variable Values
 
@@ -282,6 +278,6 @@ GNUmakefile:
 # strcache performance: lookups = 24 / hit rate = 12%
 # hash-table stats:
 # Load=21/8192=0%, Rehash=0, Collisions=0/24=0%
-# Finished Make data base on Sat Apr 23 13:11:54 2022
+# Finished Make data base on Mon May 02 23:27:09 2022
 
  
