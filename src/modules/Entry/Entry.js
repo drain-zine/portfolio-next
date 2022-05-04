@@ -17,7 +17,7 @@ import AnimatedCircle from '../../components/AnimatedCircle/AnimatedCircle';
 import classNames from 'classnames';
 import Marquee from 'react-fast-marquee';
 import HoverGallery from '../../components/HoverGallery/HoverGallery';
-import ScrollGallery from '../../modules/ScrollGallery/ScrollGallery';
+import ScrollGallery, {VerticalScroll, HorizontalScroll} from '../../modules/ScrollGallery/ScrollGallery';
 // import dynamic from 'next/dynamic'
 
 // const AnimatedCircle =  dynamic(() =>
@@ -69,8 +69,9 @@ const EntryPage = () => {
             </SectionWSidebar>
             <HoverGallery width={'100vw'} src={[AVIndex, AVArchive, AVLinks]}/> */}
 
-            <ScrollGallery>
-            <section className={styles.contents}>
+            {/* <ScrollGallery>
+                <VerticalScroll>
+                <section className={styles.contents}>
                 <section className={styles.sideBar}/>
                 <div>
                     <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies. The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
@@ -116,7 +117,86 @@ const EntryPage = () => {
                 <section className={classnames(styles.black, styles.sideBar)} />
                 
             </section>    
-            </ScrollGallery> 
+                </VerticalScroll>
+            </ScrollGallery>  */}
+            <section className={styles.contents}>
+                <section className={styles.sideBar}/>
+                <ScrollGallery className={styles.mainContents}>
+                    <VerticalScroll className={styles.leftPanel}>
+                        <div className={styles.page}>
+                            <div>
+                                <p>The Avant Vibes webpage took two design cues from seemingly disparate design philosophies. The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.</p>
+                                <p><span className={styles.interactText} onClick={() => {console.log('show');setShowImg(prevShowImg => !prevShowImg)}}>Here,</span> the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.</p>
+                            </div>
+                            <div>
+                                <p>In contrast, the second major design cue was from archaic web design practices, notably the use of tables and loud graphics which became popular in the late 90s and early to mid 00s.</p>
+                                <p>One could posit that the popularity of this style was due to the explosion of the web in the early 2000s. With the rise of web development as a profession, as well as software like adobe flash, a growing toolkit was available to designers and amateurs alike. This led to a proliferation of website templates and royalty free assets leading to heavy use of standarised tabular layouts featuring and dynamic elements such as gifs and animations.</p>
+                            </div>
+                            <div />
+                            <div className={styles.shadowPage}></div>
+                        </div>
+                        
+                        <div className={styles.page}>
+                            <div>
+                                <p>ligma</p>
+                                <p><span className={styles.interactText} onClick={() => {console.log('show');setShowImg(prevShowImg => !prevShowImg)}}>Here,</span> the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.</p>
+                            </div>
+                            <div>
+                                <p> nuts </p>
+                            </div>
+                            <div />
+                            <div className={styles.shadowPage}></div>
+                        </div>
+                        
+
+                        <div className={styles.page}>
+                            <div>
+                                <p>bolo</p>
+                                <p><span className={styles.interactText} onClick={() => {console.log('show');setShowImg(prevShowImg => !prevShowImg)}}>Here,</span> the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.</p>
+                            </div>
+                            <div>
+                                <p> cuck </p>
+                            </div>
+                            <div />
+                            <div className={styles.shadowPage}></div>
+                        </div>
+                    </VerticalScroll>
+                    <HorizontalScroll className={styles.rightPanel}>
+                        {/* <div className={styles.page2}>
+                            <div/>
+                            <div style={{positon: 'relative'}}>
+                                <div style={{transform: 'translate(0,50%)'}}>
+                                    <Image src={SupremeMain} />
+                                </div>
+                              
+                            </div>
+                            <div></div>
+                        </div> */}
+                        <div style={{width: '105vw'}} className={styles.caroseulWrapper}>
+                            <div className={styles.page3}>
+                                    <div/>
+                                    <div>
+                                        <Image src={SupremeMain} />
+                                    </div>
+                                    <div/>
+                                    
+                            </div>
+                            <div className={styles.page3}>
+                                    <div style={{transform: 'translate(0,0%)'}}>
+                                        <Image src={SupremeMain} />
+                                    </div>
+                            </div>
+                            <div className={styles.page3}>
+                                    <div style={{transform: 'translate(0,0%)'}}>
+                                        <Image src={SupremeMain} />
+                                    </div>
+                            </div>
+                        </div>
+                        
+                    </HorizontalScroll>
+                </ScrollGallery> 
+                <section className={classnames(styles.black, styles.sideBar)} />
+            </section>    
         </main>
     );
 };

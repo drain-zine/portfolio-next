@@ -65,29 +65,103 @@ $leftContentPadding: 75px;
 
 $tileSpacer: 11rem;
 
+// .contents{
+//     width: 100%;
+//     height: 100vh;
+//     display: grid;
+//     grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
+//     font-size: 0.85rem;
+
+//     div{
+//         //border-left: 1px solid black;
+
+//         p{
+//             margin: 0;
+//             padding: 1rem;
+//         }
+//     }
+
+//     .sideBar{
+//        // background-color: red;
+//         .sideText{
+//             transform: rotate(90deg);
+//             font-size: 6rem;
+//             margin: 0;
+//         }
+//     }
+
+// }
+
 .contents{
     width: 100%;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
+    display: flex;
     font-size: 0.85rem;
+    position: relative;
 
-    div{
-        //border-left: 1px solid black;
+    .sideBar{
+        flex: 1 1 15%;
+    }
 
+    .mainContents{
+        flex: 1 1 70%;
+        position: relative;
+        display: flex;
+        height: 100%;
+
+        .leftPanel, .rightPanel{
+            width: 50%;
+            height: 100%;
+        }
+
+        // .rightPanel{
+        //     display: flex;
+        //     flex-wrap: nowrap;
+        // }
+
+        .page{
+            height:100vh;
+            display: grid;
+            grid-template-columns: 3fr 3fr 1fr;
+            
+            .shadowPage{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                transform: translate(100%);
+                opacity: 0.5;
+            }
+
+            p{
+                margin: 0;
+                padding: 1rem;
+            }
+        
+        }
+
+        .caroseulWrapper{
+            height: 100vh;
+            display: flex;
+        }
+
+        .page3{
+            width: 35vw;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 3fr 3fr;
+        }
+
+        .page2{
+        height:100vh;
+        display: grid;
+        grid-template-columns: 1fr 3fr 3fr;
+        
         p{
             margin: 0;
             padding: 1rem;
         }
+    
     }
-
-    .sideBar{
-       // background-color: red;
-        .sideText{
-            transform: rotate(90deg);
-            font-size: 6rem;
-            margin: 0;
-        }
     }
 
 }

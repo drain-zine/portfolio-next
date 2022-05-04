@@ -3,12 +3,27 @@ import styles from './ScrollGallery.module.scss';
 import { motion, transform, useSpring } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useIdleTimer } from 'react-idle-timer';
+import classnames from 'classnames';
 
-const ScrollGallery = ({children, verticalUnit = '100', horizontalUnit = '100', debug = true}) => {
+export const VerticalScroll = ({children}) => (
+    <>
+        {children}
+    </>
+);
+
+export const HorizontalScroll = ({children}) => (
+    <>
+        {children}
+    </>
+);
+
+
+const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit = 35, debug = true, ...props}) => {
     const thresh = 50;
     const damping = 0.5;
     const timeout = 500;
-    const aspectRatio = verticalUnit / horizontalUnit;
+    const aspectRatio =  horizontalUnit / verticalUnit;
+    const nElements = React.Children.count(children[0].props.children);
 
     const [scrollDir, setScrollDir] = useState(0);
     const [cumulativeScroll, setCumulativeScroll] = useState(0);
@@ -34,7 +49,7 @@ const ScrollGallery = ({children, verticalUnit = '100', horizontalUnit = '100', 
         threshold: 0.98,
     });
 
-    const accumScroll = (delta) => setCumulativeScroll(prevCumulativeScroll => Math.max(Math.min(prevCumulativeScroll + (delta * damping), 0), ( children.length - 1) * -1*verticalUnit));
+    const accumScroll = (delta) => setCumulativeScroll(prevCumulativeScroll => Math.max(Math.min(prevCumulativeScroll + (delta * damping), 0), ( nElements - 1) * -1*verticalUnit));
     const resetAccum = () => setCumulativeScroll(0);
 
     const debounceScroll = () => {
@@ -103,7 +118,7 @@ const ScrollGallery = ({children, verticalUnit = '100', horizontalUnit = '100', 
                 debounceScroll();
             }else{
                 if(scrollDir < 0 && cumulativeScroll <  -1 * thresh + activeEntry * -1 * verticalUnit){ // scroll down snapping
-                    if(activeEntry < children.length - 1){ // make sure we aren't on last entry
+                    if(activeEntry < nElements - 1){ // make sure we aren't on last entry
                             setActiveEntry(entry + 1);
                             setCumulativeScroll( -1 * verticalUnit * (entry + 1));
                             debounceScroll();
@@ -126,22 +141,50 @@ const ScrollGallery = ({children, verticalUnit = '100', horizontalUnit = '100', 
     }, [galleryFocus, activeEntry, cumulativeScroll, scrollLock]);
 
     return (
-        <section className={styles.scrollGalleryContainer} ref={galleryRef}>
-                <motion.div
-                    variants = {{
-                        scroll: {
-                            y:`${cumulativeScroll}vh`,
-                            transition: {duration: scrollLock ? 0.5 : 0}
-
-                        },
-                    }}
-                    animate={
-                        galleryFocus && 'scroll'
-                    }
-                >
-                    {children}
-                    
-                </motion.div>
+        <section className={classnames(styles.scrollGalleryContainer, className)} {...props} ref={galleryRef}>
+                {children.map(c => (
+                    <>
+                        {c.type === VerticalScroll ?
+                            <motion.div
+                                variants = {{
+                                    scroll: {
+                                        y:`${cumulativeScroll}vh`,
+                                        transition: {duration: scrollLock ? 0.5 : 0}
+            
+                                    },
+                                }}
+                                animate={
+                                    galleryFocus && 'scroll'
+                                }
+                                className={c.props.className}
+                            >
+                                {c}
+                                
+                            </motion.div> : 
+                            <div style={{overflow: 'hidden', width: `${horizontalUnit}vw`}}>
+                                <motion.div
+                            variants = {{
+                                scroll: {
+                                    x:`${aspectRatio * (cumulativeScroll)}vw`,
+                                    transition: {duration: scrollLock ? 0.5 : 0}
+        
+                                },
+                            }}
+                            animate={
+                                galleryFocus && 'scroll'
+                            }
+                            className={c.props.className}
+                            >
+                                {c}
+                            </motion.div>
+                            </div>
+                            
+                        
+                        }
+                    </>
+                ))}
+                
+                
         </section>
     );
 };
