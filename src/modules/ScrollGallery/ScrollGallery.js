@@ -161,11 +161,11 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
                                 {c}
                                 
                             </motion.div> : 
-                            <div style={{overflow: 'hidden', width: `${horizontalUnit}vw`}}>
+                            <div style={{overflow: 'hidden'}}>
                                 <motion.div
                             variants = {{
                                 scroll: {
-                                    x:`${aspectRatio * (cumulativeScroll)}vw`,
+                                    x:`${aspectRatio * (cumulativeScroll)}vh`,
                                     transition: {duration: scrollLock ? 0.5 : 0}
         
                                 },
