@@ -1,130 +1,147 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ScrollGallery.module.scss';
-import { motion, useSpring } from 'framer-motion';
+import { motion, transform, useSpring } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useIdleTimer } from 'react-idle-timer';
 
-const ScrollGallery = ({children, debug = true}) => {
-    const thresh = 30;
-    const damping = 1.1;
-    const [scrollDelta, setScrollDelta] = useState(0);
+const ScrollGallery = ({children, verticalUnit = '100', horizontalUnit = '100', debug = true}) => {
+    const thresh = 50;
+    const damping = 0.5;
+    const timeout = 500;
+    const aspectRatio = verticalUnit / horizontalUnit;
+
+    const [scrollDir, setScrollDir] = useState(0);
     const [cumulativeScroll, setCumulativeScroll] = useState(0);
-    const [finalScroll, setFinalScroll] = useState(0);
-    const [pageScrollState, setPageScrollState] = useState(0);
+    const [activeEntry, setActiveEntry] = useState(0);
     const [galleryFocus, setGalleryFocus] = useState(false);
+    const [scrollLock, setScrollLock] = useState(false);
+    const [isIdle, setIsIdle] = useState(false);
+
+    useIdleTimer({
+        timeout,
+        onActive: () => setIsIdle(false),
+        onIdle: () => setIsIdle(true)
+      });
+
 
     const [ galleryRef, galleryInView, entry ] = useInView({
         /* fully in view */
-        threshold: 0.95,
-      });
+        threshold: 0.9,
+    });
 
     const [ firstChildRef, firstChildInView ] = useInView({
         /* fully in view */
         threshold: 0.98,
-      });
+    });
 
+    const accumScroll = (delta) => setCumulativeScroll(prevCumulativeScroll => Math.max(Math.min(prevCumulativeScroll + (delta * damping), 0), ( children.length - 1) * -1*verticalUnit));
+    const resetAccum = () => setCumulativeScroll(0);
 
+    const debounceScroll = () => {
+        setScrollLock(true);
+        setTimeout(() => setScrollLock(false), 500);
+    };
+    
 
-    const pageScroll = useSpring(cumulativeScroll, { stiffness: 400, damping: 90 });  
-
-    // Damp cumulative scroll w framer
+    // Listen to mouse
     useEffect(() => {
-        return pageScroll.onChange((v) => { console.log(v); setPageScrollState(v);});
-    }, [pageScroll]);
-
-    // Scroll into view when gallery is 95% in viewport
-    useEffect(() => {
-        if(galleryInView && Math.sign(scrollDelta) < 0){
-            setGalleryFocus(true);
-            setCumulativeScroll(0);
-            setFinalScroll(0);
-        }
-    }, [galleryInView]);
-
-    // Apply sticky gallery scroll effect
-    useEffect(() => {
-        if(galleryFocus){
-            console.log('scrolling')
-            entry.target.scrollIntoView(true, {behaviour: 'smooth'});
-        }
-    }, [entry, galleryFocus]);
-
-    // Lock viewport to gallery
-    useEffect(() => {
+        let timer;
         const update = (e) => {
-            const delta = e.wheelDelta;
-            setScrollDelta(delta);
-            // DISABLE UPWARD SCROLLING IF FIRST CHILD IS NOT IN VIEW
-            if(!firstChildInView && galleryFocus && Math.sign(delta) >= 0){
-                e.preventDefault();
-                e.stopPropagation();
-                return false; 
-            }else if(firstChildInView && galleryFocus &&  Math.sign(delta) >= 0){
-                setGalleryFocus(false);
-            }
-        };
+            if(galleryFocus && !scrollLock){
+                const delta = e.wheelDelta;
+                setScrollDir(Math.sign(delta));
+                // setScrollDelta(delta);
 
-        window.addEventListener('mousewheel', update,  { passive:false });
+                // if(timer !== null){
+                // // //setFinalScroll(cumulativeScroll);
+                // //     clearTimeout(timer);
+                // // }
+
+                // // timer = setTimeout(() => {
+                // //     console.log('resetting accum');
+                // //     resetAccum();
+                // // //resetAccum();
+                // // }, 1000);
+    
+                if(cumulativeScroll !== 0 && Math.sign(delta) >= 0 ){
+                    console.log('here!');
+                    // e.preventDefault();
+                    // e.stopPropagation();
+                    // return false;    
+                }
+
+                accumScroll(delta);
+            }
+            // //setFinalScroll(0);
+        }
+
+        window.addEventListener('wheel', update,  { passive:false });
 
         return () => {
-            window.removeEventListener('mousewheel', update);
+            window.removeEventListener('wheel', update);
         }
-    }, [setScrollDelta, firstChildInView, galleryFocus, cumulativeScroll]);
+    }, [setScrollDir, accumScroll, cumulativeScroll, galleryFocus, firstChildInView, scrollLock]);
 
-    // accumulate wheel delta
+
+    
+    // Focus gallery if in view
     useEffect(() => {
-        if(scrollDelta === 0){
-            setFinalScroll(cumulativeScroll);
-            setCumulativeScroll(0);
+        if(galleryInView){
+            entry.target.scrollIntoView(true, {behaviour: 'smooth'});
+            setGalleryFocus(true);
         }else{
-            if(Math.abs(cumulativeScroll) > thresh){
-                // apply threshold
-                setCumulativeScroll(Math.sign(cumulativeScroll) * thresh);
-            }
-            setCumulativeScroll(prevCumulativeScroll => (prevCumulativeScroll + scrollDelta) / damping);
+            //setGalleryFocus(false);
         }
-    }, [scrollDelta]);
+    }, [galleryInView, entry]);
 
-    // Debug hook
+    // Handle scroll snapping
     useEffect(() => {
-        if(debug){
-            console.log('delta: ' + scrollDelta + ' cum: ' + cumulativeScroll + ' inView: ' + galleryInView);
-            console.log('damped: ' + pageScrollState + ' final ' + finalScroll + ' firstChildView: ' + firstChildInView);
-            console.log('focus: ' + galleryFocus);
+        if(!scrollLock){
+            const entry = activeEntry;
+            if(isIdle){ // Snap back if idle
+                setCumulativeScroll( -1 * verticalUnit * entry); 
+                debounceScroll();
+            }else{
+                if(scrollDir < 0 && cumulativeScroll <  -1 * thresh + activeEntry * -1 * verticalUnit){ // scroll down snapping
+                    if(activeEntry < children.length - 1){ // make sure we aren't on last entry
+                            setActiveEntry(entry + 1);
+                            setCumulativeScroll( -1 * verticalUnit * (entry + 1));
+                            debounceScroll();
+                    }
+                }else if(scrollDir > 0 && cumulativeScroll > thresh + activeEntry * -1 * verticalUnit){ // scroll up snapping
+                    if(activeEntry > 0){ // make sure we aren't on first entry
+                            setActiveEntry(entry - 1);
+                            setCumulativeScroll( -1 * verticalUnit * (entry - 1));
+                            debounceScroll();
+                        }
+                }
+            }
         }
-    }, [scrollDelta, cumulativeScroll, galleryInView, pageScrollState, finalScroll, firstChildInView, galleryFocus]);
+        
+    }, [cumulativeScroll, scrollLock, activeEntry, scrollDir, isIdle]);
+
+    useEffect(() => {
+        console.log('gallery focus: ' + galleryFocus, ' activeEntry: ' + activeEntry + ' scroll lock: ' + scrollLock);
+        console.log('cum scroll: ' + cumulativeScroll);
+    }, [galleryFocus, activeEntry, cumulativeScroll, scrollLock]);
 
     return (
         <section className={styles.scrollGalleryContainer} ref={galleryRef}>
-            {/* {children.map((c, i) => (
                 <motion.div
-                    id={i === 0? 'ref' : 'noref'}
-                    ref={i === 0 ? firstChildRef : undefined}
-                    variants={{
-                        scrollLink: {
-                            y: firstChildInView ? `${Math.min(cumulativeScroll, 0)}%` : `${cumulativeScroll}%`
+                    variants = {{
+                        scroll: {
+                            y:`${cumulativeScroll}vh`,
+                            transition: {duration: scrollLock ? 0.5 : 0}
+
                         },
-                        fullScroll: {
-                            y: firstChildInView ? `${Math.min(Math.sign(finalScroll) * 100, 0)}%` : `${Math.sign(finalScroll) * 100}%`,
-                            transition: {
-                                duration: 0.5
-                            }
-                        }
                     }}
                     animate={
-                         galleryFocus && ( Math.abs(finalScroll) <= thresh ? 
-                            'scrollLink' :
-                            'fullScroll' )
+                        galleryFocus && 'scroll'
                     }
                 >
-                    {c}
+                    {children}
+                    
                 </motion.div>
-            ))} */}
-
-            {children.map((c, i) => (
-                <motion.div>
-                    {c}
-                </motion.div>
-            ))}
         </section>
     );
 };

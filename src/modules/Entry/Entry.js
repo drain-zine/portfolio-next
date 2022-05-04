@@ -48,7 +48,7 @@ const EntryPage = () => {
 
     return(
         <main ref={mainRef} className={styles.main}>
-            <svg style={{zIndex: 3, position: 'absolute', stroke: 'white', left: '50%', top: '0', transform: 'translateX(-50%)'}} height={`${height}px`}>
+            {/* <svg style={{zIndex: 3, position: 'absolute', stroke: 'white', left: '50%', top: '0', transform: 'translateX(-50%)'}} height={`${height}px`}>
                 <line x1="50%" y1="0" x2="50%" y2={`${rotateState * 100}%`}></line>
             </svg>
             <SectionWSidebar sidebarLeft={true} mainColour="black" sidebarWidth="15%">
@@ -67,7 +67,7 @@ const EntryPage = () => {
                 </div>
 
             </SectionWSidebar>
-            <HoverGallery width={'100vw'} src={[AVIndex, AVArchive, AVLinks]}/>
+            <HoverGallery width={'100vw'} src={[AVIndex, AVArchive, AVLinks]}/> */}
 
             <ScrollGallery>
             <section className={styles.contents}>
@@ -90,6 +90,21 @@ const EntryPage = () => {
                 <section className={styles.sideBar}/>
                 <div>
                     <p>ligma</p>
+                    <p><span className={styles.interactText} onClick={() => {console.log('show');setShowImg(prevShowImg => !prevShowImg)}}>Here,</span> the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.</p>
+                </div>
+                <div>
+                    <p> nuts </p>
+                </div>
+                <div />
+                <div />
+                <div />
+                <section className={classnames(styles.black, styles.sideBar)} />
+                
+            </section>    
+            <section className={styles.contents}>
+                <section className={styles.sideBar}/>
+                <div>
+                    <p>cum</p>
                     <p><span className={styles.interactText} onClick={() => {console.log('show');setShowImg(prevShowImg => !prevShowImg)}}>Here,</span> the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.</p>
                 </div>
                 <div>
