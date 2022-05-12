@@ -1,13 +1,15 @@
+@import '../../styles/variables.scss';
+
 .rightText{
     position: absolute;
-    top: 0;
+    top: $panelPadding;
     right: 15%;
     width: 30%;
 }
 
 .leftText{
     position: absolute;
-    top: 0;
+    top: $panelPadding;
     left: 15%;
     width: 30%;
 }

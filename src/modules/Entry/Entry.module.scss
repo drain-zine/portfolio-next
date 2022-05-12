@@ -197,7 +197,7 @@ $tileSpacer: 11rem;
 
             h3{
                 font-size: 3rem;
-                margin: 1rem 0;
+                margin: 0 0 1rem 0;
             }
 
             .subtitle{
@@ -276,21 +276,6 @@ $tileSpacer: 11rem;
     top: -12.5%;
     left: -52.25%;
     width: 100%;
-
-    .controls{
-        display: flex;
-        justify-content: space-between;
-        width: 10%;
-
-        p{
-            &:hover{
-                color:red;
-                cursor: pointer;
-            }
-        }
-    }
-
-
 
 }
 
