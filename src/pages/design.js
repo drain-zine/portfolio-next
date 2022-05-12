@@ -54,7 +54,7 @@ const Design = () => {
                             <div className={styles.content}>
                                 <h3>Hello Chuchu :)</h3>
                                 <div className={styles.subTitle}>
-                                what do u think of this layout
+                                    for my baby - sending u virtual cuddles
                                 </div>
                             </div>
                             <div style={{backgroundColor: '#F5F5F5'}} className={styles.shadowPage} />

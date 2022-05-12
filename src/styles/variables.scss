@@ -1,2 +1,6 @@
 $main: white;
 $secondary: black;
+$sidebarWidth: 2%;
+$mainContentWidth: calc(100% - 2 * $sidebarWidth);
+$paneWidth: 30%;
+$panePadding: 15%;

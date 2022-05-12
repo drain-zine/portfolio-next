@@ -1,0 +1,32 @@
+.rightText{
+    position: absolute;
+    top: 0;
+    right: 15%;
+    width: 30%;
+}
+
+.leftText{
+    position: absolute;
+    top: 0;
+    left: 15%;
+    width: 30%;
+}
+
+.vertText{
+    display: flex;
+    
+    div{
+        width: 50%;
+        
+        padding: 0 1rem;
+    }
+}
+
+.horzText{
+    display: flex;
+    flex-direction: column;
+
+    div{
+        width: 100%;
+    }
+}

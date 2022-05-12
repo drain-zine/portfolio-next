@@ -22,6 +22,7 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
     const thresh = 50;
     const damping = 0.5;
     const timeout = 500;
+
     const aspectRatio =  horizontalUnit / verticalUnit;
     const nElements = React.Children.count(children[0].props.children);
 
@@ -50,6 +51,7 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
     });
 
     const accumScroll = (delta) => setCumulativeScroll(prevCumulativeScroll => Math.max(Math.min(prevCumulativeScroll + (delta * damping), 0), ( nElements - 1) * -1*verticalUnit));
+    //const accumScroll = (delta) => setCumulativeScroll(prevCumulativeScroll => prevCumulativeScroll + (delta * damping));
     const resetAccum = () => setCumulativeScroll(0);
 
     const debounceScroll = () => {
@@ -60,42 +62,30 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
 
     // Listen to mouse
     useEffect(() => {
-        let timer;
         const update = (e) => {
-            if(galleryFocus && !scrollLock){
+            console.log('update cb')
+            if(galleryFocus){
                 const delta = e.wheelDelta;
                 setScrollDir(Math.sign(delta));
-                // setScrollDelta(delta);
-
-                // if(timer !== null){
-                // // //setFinalScroll(cumulativeScroll);
-                // //     clearTimeout(timer);
-                // // }
-
-                // // timer = setTimeout(() => {
-                // //     console.log('resetting accum');
-                // //     resetAccum();
-                // // //resetAccum();
-                // // }, 1000);
-    
-                if(cumulativeScroll !== 0 && Math.sign(delta) >= 0 ){
-                    console.log('here!');
-                    // e.preventDefault();
-                    // e.stopPropagation();
-                    // return false;    
+                !scrollLock && accumScroll(delta);
+                console.log('in update scroll');
+                if(cumulativeScroll < 0 && Math.sign(delta) >= 0 ){
+                    console.log('stop prop ' + cumulativeScroll);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;    
                 }
 
-                accumScroll(delta);
+                
             }
-            // //setFinalScroll(0);
         }
 
-        window.addEventListener('wheel', update,  { passive:false });
+        window.addEventListener('mousewheel', update,  { passive:false });
 
         return () => {
-            window.removeEventListener('wheel', update);
+            window.removeEventListener('mousewheel', update);
         }
-    }, [setScrollDir, accumScroll, cumulativeScroll, galleryFocus, firstChildInView, scrollLock]);
+    }, [setScrollDir, accumScroll, cumulativeScroll, galleryFocus, scrollLock]);
 
 
     
@@ -104,8 +94,9 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
         if(galleryInView){
             entry.target.scrollIntoView(true, {behaviour: 'smooth'});
             setGalleryFocus(true);
+            debounceScroll();
         }else{
-            //setGalleryFocus(false);
+            setGalleryFocus(false);
         }
     }, [galleryInView, entry]);
 
@@ -136,9 +127,11 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
     }, [cumulativeScroll, scrollLock, activeEntry, scrollDir, isIdle]);
 
     useEffect(() => {
-        console.log('gallery focus: ' + galleryFocus, ' activeEntry: ' + activeEntry + ' scroll lock: ' + scrollLock);
-        console.log('cum scroll: ' + cumulativeScroll);
-    }, [galleryFocus, activeEntry, cumulativeScroll, scrollLock]);
+        if(debug){
+            console.log('gallery focus: ' + galleryFocus, ' activeEntry: ' + activeEntry + ' scroll lock: ' + scrollLock);
+            console.log('cum scroll: ' + cumulativeScroll);
+        }
+    }, [debug, galleryFocus, activeEntry, cumulativeScroll, scrollLock]);
 
     return (
         <section className={classnames(styles.scrollGalleryContainer, className)} {...props} ref={galleryRef}>
@@ -161,23 +154,23 @@ const ScrollGallery = ({children, className, verticalUnit = 100, horizontalUnit 
                                 {c}
                                 
                             </motion.div> : 
-                            <div style={{overflow: 'hidden'}}>
-                                <motion.div
-                            variants = {{
-                                scroll: {
-                                    x:`${aspectRatio * (cumulativeScroll)}vh`,
-                                    transition: {duration: scrollLock ? 0.5 : 0}
-        
-                                },
-                            }}
-                            animate={
-                                galleryFocus && 'scroll'
-                            }
-                            className={c.props.className}
-                            >
-                                {c}
-                            </motion.div>
-                            </div>
+                                <div style={{overflow: 'hidden'}}>
+                                    <motion.div
+                                        variants = {{
+                                            scroll: {
+                                                x:`${aspectRatio * (cumulativeScroll)}vh`,
+                                                transition: {duration: scrollLock ? 0.5 : 0}
+                    
+                                            },
+                                        }}
+                                        animate={
+                                            galleryFocus && 'scroll'
+                                        }
+                                        className={c.props.className}
+                                        >
+                                            {c}
+                                        </motion.div>
+                                </div>
                             
                         
                         }
