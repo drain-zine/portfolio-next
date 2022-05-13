@@ -119,19 +119,14 @@ const EntryPage = ({ page }) => {
 };
 
 export async function getStaticPaths(){
-    // const entries = fs.readDirSync('../../../data/design/');
-    // console.log(entries);
+    // pretend we have an API
+    const entries = process.env.paths;
 
-    // const paths = entries.map(entry => ({
-    //     params: {
-    //         entryId: entry.split('.')[0]
-    //     }
-    // }));
-    const paths = [ {
-        params: { entryId: 'avant-vibes', }
-    }, {
-        params: { entryId: 'drain-e1' }
-    }];
+    const paths = entries.map(entry => ({
+        params: {
+            entryId: entry.split('.')[0]
+        }
+    }));
 
     return {
         paths,
@@ -143,7 +138,7 @@ export async function getStaticProps({ params }){
     const entryId = params.entryId;
 
     const { data } = require('../../../data/design/' + entryId + '.js');
-
+    
     return {
         props: {
             page: data.page

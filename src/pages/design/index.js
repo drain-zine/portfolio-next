@@ -4,7 +4,7 @@ import styles from '../../styles/landing.module.scss';
 import { motion } from 'framer-motion';
 import Nav from '../../components/Nav/Nav';
 import classnames from 'classnames';
-
+import Image from 'next/image';
 import Link from 'next/link';
 
 
@@ -56,7 +56,7 @@ const Design = ({tiles}) => {
                                         backgroundColor,
                                         color
                                     }}
-
+                                    key={`design_text-${i}`}
                                     className={styles.page} >
                                     <div className={styles.content}>
                                         <Link href={tile.link}><h3>{tile.title}</h3></Link>
@@ -71,12 +71,18 @@ const Design = ({tiles}) => {
                     </VerticalScroll>
                     <HorizontalScroll className={styles.gallerySection}>
                         <div style={{width: `${tiles.length * 100}vh`}} className={styles.caroseulWrapper}>
-                            {tiles.map((tile) => (
-                                <section className={styles.page}>
+                            {tiles.map((tile,i) => (
+                                <section className={styles.page} key={`design_img-${i}`}>
                                     <div style={{
                                         backgroundImage: `url(${tile.img.src})`,
                                         backgroundPosition: '15%'
                                     }} className={styles.fullBackground}>
+                                        {/* <Image src={tile.img}
+                                            layout="fill"
+                                            objectFit="cover"
+                                            quality={100}
+                                            objectPosition={'15%'}
+                                        /> */}
                                     </div>
                                 </section>
                             ))}
@@ -126,7 +132,7 @@ const Design = ({tiles}) => {
                             whileHover={{scale: 1.1}}
                             transition={{duration: 0.2}}
                         >
-                            <Link href={tile.link}>
+                            <Link href={tile.link} key={`contents-${i}`}>
                                 <p>{i}.&nbsp;&nbsp;{tile.title}</p>
                             </Link>
                         </motion.div>
@@ -140,11 +146,11 @@ const Design = ({tiles}) => {
 
 
 export async function getStaticProps(){
-    const paths = ['avant-vibes', 'drain-e1'];
+    const paths = process.env.paths.map(p => p.split('.')[0]);
 
     const tiles = paths.map(p => {
         const { data } =  require('../../../data/design/' + p + '.js');
-
+        console.log(data.tile);
         return({
         ...data.tile,
         link: `/design/${p}`
