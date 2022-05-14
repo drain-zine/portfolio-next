@@ -56,39 +56,6 @@ $leftContentPadding: 75px;
     }
 }
 
-.nav{
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-
-    .spacer{
-        width: 85%;
-    }
-    .controls{
-        width: 15%;
-        display: flex;
-        flex-direction: column;
-
-        h3{
-            margin: auto 0;
-            font-size: 6rem;
-            transform: rotate(90deg);
-        }
-
-        p{
-            margin: 0;
-            transform: rotate(90deg); 
-        }
-    }
-}
-
-// .sideText{
-//     position: fixed;
-//     width: 100vh;
-//     height: 100vh;
-// }
-
 .subtitleContent{
     display: flex;
     flex-direction: row;
@@ -96,163 +63,107 @@ $leftContentPadding: 75px;
     width: 50%;
 }
 
-.sidebar{
-    color: black;
-    background-color: white;
-    flex: 0 0 $sidebarWidth;
-}
-
 $tileSpacer: 11rem;
+
+// .contents{
+//     width: 100%;
+//     height: 100vh;
+//     display: grid;
+//     grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
+//     font-size: 0.85rem;
+
+//     div{
+//         //border-left: 1px solid black;
+
+//         p{
+//             margin: 0;
+//             padding: 1rem;
+//         }
+//     }
+
+//     .sideBar{
+//        // background-color: red;
+//         .sideText{
+//             transform: rotate(90deg);
+//             font-size: 6rem;
+//             margin: 0;
+//         }
+//     }
+
+// }
 
 .contents{
     width: 100%;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 3fr 3fr 3fr 2fr 3fr 3fr 3fr;
-    font-size: 0.9rem;
+    display: flex;
+    font-size: 0.85rem;
+    position: relative;
 
-    div{
-        //border-left: 1px solid black;
+    .sideBar{
+        flex: 1 1 15%;
+    }
 
+    .mainContents{
+        flex: 1 1 70%;
+        position: relative;
+        display: flex;
+        height: 100%;
+
+        .leftPanel, .rightPanel{
+            width: 50%;
+            height: 100%;
+        }
+
+        // .rightPanel{
+        //     display: flex;
+        //     flex-wrap: nowrap;
+        // }
+
+        .page{
+            height:100vh;
+            display: grid;
+            grid-template-columns: 3fr 3fr 1fr;
+            
+            .shadowPage{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                transform: translate(100%);
+                opacity: 0.5;
+            }
+
+            p{
+                margin: 0;
+                padding: 1rem;
+            }
+        
+        }
+
+        .caroseulWrapper{
+            height: 100vh;
+            display: flex;
+        }
+
+        .page3{
+            width: 35vw;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 3fr 3fr;
+        }
+
+        .page2{
+        height:100vh;
+        display: grid;
+        grid-template-columns: 1fr 3fr 3fr;
+        
         p{
             margin: 0;
             padding: 1rem;
         }
+    
+    }
     }
 
-    .sideBar{
-       // background-color: red;
-        .sideText{
-            transform: rotate(90deg);
-            font-size: 6rem;
-            margin: 0;
-        }
-    }
-
-    // .sideBar:first-child{
-    //     border-right: 1px solid black;
-    // }
-
-    // .sideBar:last-child{
-    //     border-left: 1px solid black;
-    // }
-
-    .doubleColumn{
-        grid-column: span 2;
-    }
-
-    .spread{
-        grid-column: span 5;
-    }
-
-    .halfColSpacer{
-        height: 50vh;
-    }
-
-    .blackBar{
-        height: 151.91px;
-        width: 100%;
-        background-color: black;
-    }
-}
-
-.contentsFitToHeight{
-    @extend .contents;
-    height: max-content;
-}
-
-.contentsHalfHeight{
-    @extend .contents;
-    height: 50vh;
-}
-
-.quoteBars{
-    display: flex;
-    flex-direction: column-reverse;
-    text-align: right;
-
-    h3{
-        margin: 0;
-        font-size: 6rem;
-    }
-
-    h3:first-child{
-        background-color: darkred;
-    }
-    h3:last-child{
-        background-color: darkgoldenrod;
-    }
-}
-
-.rotatedTitle{
-    position: absolute;
-    top: 0;
-    font-size: 6rem;
-    color: darkgoldenrod;
-    transform: rotate(-90deg);
-}
-
-.relative{
-    position: relative;
-}        
-
-.extend{
-    display: flex;
-    width: 150%;
-}
-
-.black{
-    background: black;
-}
-
-.halfBackground{
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    z-index: 1
-}
-
-.left{
-    left: 0;
-}
-.right{
-    right: 0;
-}
-
-.overflow{
-    width: 200%;
-    transform: translate(-50%);
-    color: white;
-    position: relative;
-    z-index: 4
-}
-
-.overflowLeft{
-    @extend .overflow;
-    transform: translate(0%);
-}
-
-.centralImgContainer{
-    top: 0;
-    width: 250%;
-    transform: translate(-30%);
-    left: 50%;
-    z-index: 2;
-    height: 100%;
-    overflow: hidden;
-
-    .span{
-        z-index: 2;
-    }
-}
-
-.animatableReveal{
-    z-index: 3;
-    height: 100%;
-    background: black;
-    position: relative;
 }
 
 .interactText{
@@ -267,62 +178,169 @@ $tileSpacer: 11rem;
     }
 }
 
-.halfBlackR{
-    background: linear-gradient(90deg, white 0%, transparent 50%);
-    position: relative;
-}
-
-.halfBlackL{
-    background: linear-gradient(90deg, transparent 0%, white 50%);
-    position: relative;
-}
-
-$barHeight: 12.5%;
-
-.imgBox{
-    width: 301%;
-    transform: translate(-66.666%);
-    height: 100%;
-
-    .imgContainer{
-        position: absolute;
-        top: calc(50% + $barHeight);
-        left: 50%;
-        transform: translate(-50%, calc(-50% - $barHeight));
-        width: 450px;
-    }
-}
-
-.topBar{
-    position: absolute;
-    width: 100%;
-    height: $barHeight;
+.black{
     background: black;
 }
 
-.subsubtitle{
-    color: white;
-    font-size: 3rem;
-    position: absolute;
-    transform: rotate(-90deg);
-    margin: 0;
-    left: -20%;
-    top: 70%;
+.content{
+    width: 100vw;
+    position: relative;
+    display: flex;
+
+    .mainContent{
+        width: 96%;
+
+        .panel{
+            height: 100vh;
+            font-size: 0.9rem;
+            position: relative;
+
+            h3{
+                font-size: 3rem;
+                margin: 0 0 1rem 0;
+            }
+
+            .subtitle{
+                font-size: 1.25rem;
+                margin: 1rem 0;
+            }
+
+            .rightText{
+                position: absolute;
+                top: 0;
+                right: 15%;
+                width: 30%;
+            }
+
+            .leftText{
+                position: absolute;
+                top: 0;
+                left: 15%;
+                width: 30%;
+            }
+
+            .textVert{
+                display: flex;
+                
+                div{
+                    width: 50%;
+                    
+                    padding: 0 1rem;
+                }
+            }
+
+            .textHorz{
+                display: flex;
+                flex-direction: column;
+
+                div{
+                    width: 100%;
+                }
+            }
+
+            .centreImg{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+               
+            }
+
+            .central{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                height: calc(100vh - 4%);
+            }
+        }
+    }
+
+    .sidebar{
+        width: 2%;
+        height: 350vh; // TODO FIX
+        //background: black;
+    }
 }
 
-.sMainWrapper{
-    position: absolute;
-    top: 70%;
-    left: 0;
-    height: 500px;
+.nav{
+    font-size: 0.8rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+    position: fixed;
+    z-index: 100;
+    transform: rotate(-90deg);
+    top: -12.5%;
+    left: -52.25%;
     width: 100%;
-    transform: translate(0,-70%);
+
 }
 
-.verticalMarquee{
-    transform: rotate(-90deg);
 
-    h3{
-        font-size: 2rem;
+.footer{
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    background-color: black;
+
+    .footerContent{
+        height: 50vh;
+        width: 100%;
+        background-color: black;
+        position: relative;
+
+        h3{
+            color: black;
+            font-size: 4rem;
+            transform: translate(0%,calc(-100% - 1rem));
+            left: calc(15% + 1rem);
+            margin: 0;
+            position: absolute;
+        }
+
+        .footerNav{
+            margin: 0 15%;
+            width: 70%;
+            position: relative;
+            display: flex;
+            height: 50vh;
+
+            div{
+                width: 50%;
+                height: 50vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                cursor: pointer;
+
+                h4{
+                    font-size: 2rem;
+                }
+
+
+            }
+        }
+    }
+}
+
+
+.option{
+    p{
+        margin-bottom: 0.25rem;
+    }
+}
+.underline{
+    background: black;
+    height: 0.125rem;
+    width: 50%;
+}
+
+.markdown{
+    p:first-child{
+        margin-top: 0;
     }
 }

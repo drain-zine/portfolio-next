@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.centreImg{
+    position: absolute;
+}
+
+.container{
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: $paneWidth;
+}
+
+.left{
+    left: 15%;
+}
+
+.right{
+    right: 15%;
+}

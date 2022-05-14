@@ -97,3 +97,48 @@ $ar: calc(100vw / 100vh);
     width: 1%;
     background:darkred;
 }
+
+.main2{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    user-select: none;
+}
+
+.title2{
+    position: absolute;
+    transform: rotate(-90deg);
+    top: 39.8%;
+    left: 11%;
+
+    h3{
+        font-size: 5rem;
+    }
+}
+
+.controls2{
+    position: absolute;
+    font-size: 2rem;
+    top: 21.2%;
+    left: 65%;
+    z-index: 10;
+
+    h4{
+        margin: 0;
+    }
+
+    h4:hover{
+        color: darkred; 
+        cursor: pointer;
+    }
+}
+
+.canvas2{
+    width: 40vw;
+    height: 40vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: dimgrey;
+}

@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.rightText{
+    position: absolute;
+    top: $panelPadding;
+    right: 15%;
+    width: 30%;
+}
+
+.leftText{
+    position: absolute;
+    top: $panelPadding;
+    left: 15%;
+    width: 30%;
+}
+
+.vertText{
+    display: flex;
+    
+    div{
+        width: 50%;
+        
+        padding: 0 1rem;
+    }
+}
+
+.horzText{
+    display: flex;
+    flex-direction: column;
+
+    div{
+        width: 100%;
+    }
+}

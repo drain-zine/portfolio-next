@@ -46,36 +46,49 @@ const Scene = () => {
 
 const Home = () => {
     return (
-        <motion.main
-            className={styles.main}
-            variants={staggerVariants}
-            initial={'initial'}
-            animate={'in'}
-            exit={'out'}
-        >
-            <motion.section className={styles.nav}>
-                <motion.div className={styles.horizLine}></motion.div>
-                <motion.div className={styles.verticalLine}></motion.div>
+        // <motion.main
+        //     className={styles.main}
+        //     variants={staggerVariants}
+        //     initial={'initial'}
+        //     animate={'in'}
+        //     exit={'out'}
+        // >
+        //     <motion.section className={styles.nav}>
+        //         <motion.div className={styles.horizLine}></motion.div>
+        //         <motion.div className={styles.verticalLine}></motion.div>
+        //         <h3>Tom Stannett</h3>
+
+        //         <motion.div className={styles.controls}>
+        //             <Link href='/design'>
+        //             <h4>Design</h4>
+        //             </Link>
+        //             <h4>Digital Posters</h4>
+        //             <h4>Contact</h4>
+        //         </motion.div>
+
+        //         <motion.div className={styles.blurb}>
+        //             <p>
+        //             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae finibus lacus, eget dictum libero. Duis dapibus consequat dolor id lacinia. Nam et nisi at felis hendrerit dapibus vitae vel eros. Etiam ligula libero, viverra fermentum efficitur suscipit, aliquam pulvinar ipsum. Pellentesque consequat pretium augue, non efficitur nunc pulvinar ac.
+        //             </p>
+        //         </motion.div>
+        //     </motion.section>
+        //     <motion.section className={styles.canvas}>
+        //         <Scene />
+        //     </motion.section>
+        // </motion.main>
+        <main className={styles.main2}>
+            <section className={styles.title2}>
                 <h3>Tom Stannett</h3>
-
-                <motion.div className={styles.controls}>
-                    <Link href='/design'>
-                    <h4>Design</h4>
-                    </Link>
-                    <h4>Digital Posters</h4>
-                    <h4>Contact</h4>
-                </motion.div>
-
-                <motion.div className={styles.blurb}>
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae finibus lacus, eget dictum libero. Duis dapibus consequat dolor id lacinia. Nam et nisi at felis hendrerit dapibus vitae vel eros. Etiam ligula libero, viverra fermentum efficitur suscipit, aliquam pulvinar ipsum. Pellentesque consequat pretium augue, non efficitur nunc pulvinar ac.
-                    </p>
-                </motion.div>
-            </motion.section>
-            <motion.section className={styles.canvas}>
+            </section>
+            <section className={styles.controls2}>
+                <Link href='/design'><h4>Design</h4></Link>
+                <h4>Digital Posters</h4>
+                <h4>Contact</h4>
+            </section>
+            <section className={styles.canvas2}>
                 <Scene />
-            </motion.section>
-        </motion.main>
+            </section>
+        </main>
     );
 };
 

@@ -1,30 +1,17 @@
 import React, {useEffect, useState, useRef} from 'react';
-import styles from './Entry.module.scss';
+import styles from '../../modules/Entry/Entry.module.scss';
 import { motion, useViewportScroll, useSpring, transform } from 'framer-motion';
 import { variants } from '../../animations/fadeOut';
 import SectionWSidebar from '../../components/SectionWSidebar/SectionWSidebar';
-import Image from 'next/image';
-import AVIndex from '../../assets/AvantVibes/AVIndex.png'
-import AVArchive from '../../assets/AvantVibes/AVArchive.png'
-import AVLinks from '../../assets/AvantVibes/AVLinks.png'
-import FrogGallery from '../../assets/AvantVibes/FrogGallery.png'
-import WarcraftIndex from '../../assets/AvantVibes/WarcraftIndex.png'
-import SupremeMain from '../../assets/AvantVibes/SupremeMain2.png'
-import SupremeAbout from '../../assets/AvantVibes/SupremeAbout2.png'
-import classnames from 'classnames';
-import { TextTile, TextPictureTile, PictureTile } from '../../components/Tiles';
-import AnimatedCircle from '../../components/AnimatedCircle/AnimatedCircle';
-import classNames from 'classnames';
-import { data } from '../../../data/design/avant-vibes';
 
 import HoverGallery from '../../components/HoverGallery/HoverGallery';
-import ScrollGallery, {VerticalScroll, HorizontalScroll} from '../../modules/ScrollGallery/ScrollGallery';
 import { useInView } from 'react-intersection-observer';
 import TextBox from '../../components/TextBox/TextBox';
 import CentralImage from '../../components/CentralImage/CentralImage';
 import HalfPageImage from '../../components/HalfPageImage/HalfPageImage';
-import UnderlineText from '../../components/UnderlineText/UnderlineText';
 import Nav from '../../components/Nav/Nav';
+import ReactMarkdown from 'react-markdown';
+import Link from 'next/link';
 
 
 const TypeMap = {
@@ -33,11 +20,10 @@ const TypeMap = {
     CentralImage
 };
 
-const EntryPage = () => {
-    const mainRef = useRef(null);
-    const [height, setHeight] = useState(0);
-    const [showImg, setShowImg] = useState(false);
+const EntryPage = ({ page, nextEntry, prevEntry }) => {
+    const header = page.header;
 
+    const mainRef = useRef(null);
     const { scrollYProgress } = useViewportScroll();
     const pathLength = useSpring(scrollYProgress, { stiffness: 400, damping: 90 });
     const [rotateState, setRotateState] = useState(0);
@@ -56,44 +42,40 @@ const EntryPage = () => {
 
 
 
-    useEffect(() => {
-        return pathLength.onChange((v) => setRotateState(v));
-    }, [pathLength]);
+    // useEffect(() => {
+    //     return pathLength.onChange((v) => setRotateState(v));
+    // }, [pathLength]);
 
-    useEffect(() => {
-        if(mainRef.current){
-            setHeight(mainRef.current.clientHeight);
-        }
-    }, [ mainRef ]);
+
 
     return(
         <main ref={mainRef} className={styles.main}>
             <div className={styles.nav}>
-                <Nav/>
+                <Nav color={'black'}/>
                 <p>{rotateState.toFixed(2)}</p>
             </div>
 
             <SectionWSidebar sidebarLeft={true} mainColour="black" sidebarWidth="15%">
                 <div className = {styles.titleWrapper}>
                     <div className={styles.titleContent}>
-                        <h3 className={styles.title}>{data.page.header.title}</h3>
-                        <p>{data.page.header.subtitle}</p>
-                        <h4>Project Started: {data.page.header.startDate}</h4>
+                        <h3 className={styles.title}>{header.title}</h3>
+                        <p>{header.subtitle}</p>
+                        <h4>Project Started: {header.startDate}</h4>
                     </div>
                     <div className={styles.subtitleContent}>
                         <div className={styles.sideText}>
-                            <h3>{data.page.header.sidebarTitle}</h3>
-                            <p>{data.page.header.sidebarSubtitle}</p> 
+                            <h3>{header.sidebarTitle}</h3>
+                            <p>{header.sidebarSubtitle}</p> 
                         </div>
                     </div>
                 </div>
 
             </SectionWSidebar>
-            {data.page.gallery && <HoverGallery width={'100vw'} src={data.page.gallery}/> }
+            {page.gallery && <HoverGallery width={'100vw'} src={page.gallery}/> }
             <section ref={galleryRef} className={styles.content}>
                 <section className={styles.sidebar}/>
                 <section className={styles.mainContent}>
-                    {data.page.panels.map(panel => (
+                    {page.panels.map(panel => (
                         <section className={styles.panel}>
                             { panel.map(el => {
                                 let children;
@@ -112,7 +94,7 @@ const EntryPage = () => {
                                         );
                                     }
 
-                                    children.push(el.text.map(t => <div>{t}</div>));
+                                    children.push(el.text.map(t => <div className={styles.markdown}><ReactMarkdown>{t}</ReactMarkdown></div>));
                                 }
 
                                 return React.createElement(
@@ -129,12 +111,81 @@ const EntryPage = () => {
             </section>
             <section className={styles.footer}>
                         <div className={styles.footerContent}>
-                            
+                            <h3>Next</h3>
+                            <div className={styles.footerNav}>
+                                {prevEntry ? <Link href={prevEntry.link}>
+                                    <div>
+                                        <h4>{prevEntry.title}</h4>
+                                    </div>
+                                </Link> : <div/> }
+                                { nextEntry ? <Link href={nextEntry.link}>
+                                    <div>
+                                        <h4>{nextEntry.title}</h4>
+                                    </div>
+                                </Link> : <div /> }
+                            </div>
                         </div>
             </section>
         </main>
     );
 };
+
+export async function getStaticPaths(){
+    // pretend we have an API
+    const entries = process.env.paths;
+
+    const paths = entries.map((entry, i) => ({
+            params: {
+                entryId: entry.split('.')[0]
+            }
+    }));
+
+    return {
+        paths,
+        fallback: false
+    }
+};
+
+export async function getStaticProps({ params }){
+    const entryId = params.entryId;
+    const entries = process.env.paths;
+    const i = entries.indexOf(entryId + '.js');
+    const n = entries.length;
+
+    console.log(i);
+
+    let nextEntry = null;
+    let prevEntry = null;
+
+
+
+    const { data } = require('../../../data/design/' + entryId + '.js');
+
+    if(i <  (n - 1)){
+        const { data: nextEntryData} =  require('../../../data/design/' + entries[i+1]);
+        nextEntry = {
+            title: nextEntryData.tile.title,
+            link: `/design/${entries[i+1].split('.')[0]}`
+        }
+    }
+
+    if(i > 0){
+        const { data: prevEntryData} =  require('../../../data/design/' + entries[i-1]);
+        prevEntry = {
+            title: prevEntryData.tile.title,
+            link: `/design/${entries[i-1].split('.')[0]}`
+        }
+    }
+    
+    return {
+        props: {
+            page: data.page,
+            nextEntry,
+            prevEntry
+        }
+    }
+};
+
 
 export default EntryPage;
 

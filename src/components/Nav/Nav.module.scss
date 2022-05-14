@@ -1,0 +1,13 @@
+.controls{
+    display: flex;
+    justify-content: space-between;
+    width: 10%;
+
+    p{
+        margin-bottom: 0rem;
+        &:hover{
+            color:red;
+            cursor: pointer;
+        }
+    }
+}
