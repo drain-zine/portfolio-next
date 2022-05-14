@@ -7,6 +7,8 @@ import classnames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import test from '../../assets/AvantVibes/AVArchive.png';
+import AVIndex from '../../assets/AvantVibes/AVIndex.png';
 
 const colorPairings = [
     {
@@ -29,6 +31,7 @@ const colorPairings = [
 
 
 const Design = ({tiles}) => {
+    console.log(test);
     const [showContents, setShowContents] = useState(false);
     const toggleShowContents = () => setShowContents(prevShowContents => !prevShowContents);
 
@@ -77,12 +80,6 @@ const Design = ({tiles}) => {
                                         backgroundImage: `url(${tile.img.src})`,
                                         backgroundPosition: '15%'
                                     }} className={styles.fullBackground}>
-                                        {/* <Image src={tile.img}
-                                            layout="fill"
-                                            objectFit="cover"
-                                            quality={100}
-                                            objectPosition={'15%'}
-                                        /> */}
                                     </div>
                                 </section>
                             ))}
@@ -95,7 +92,7 @@ const Design = ({tiles}) => {
                 onMouseEnter={toggleShowContents}
                 onMouseLeave={toggleShowContents}
                 variants={{
-                    hide: { width: 'calc((100vw - 200vh) / 2)'},
+                    hide: { width: 'calc((100vw - 200vh) / 2)', transition: {delay: 0.5, duration: 0.5} },
                     show: { width: '15%' }
                 }}
                 transition={{duration: 0.5, staggerChildren: 0.5}}
@@ -112,7 +109,7 @@ const Design = ({tiles}) => {
                 <motion.p className={styles.title}
                     variants={{
                         hide: { opacity: 0},
-                        show: { opacity: 1}
+                        show: { opacity: 1, transition: {delay: 0.5}}
                     }}
                     animate={!showContents ? 'show' : 'hide'}
                 >
@@ -120,11 +117,14 @@ const Design = ({tiles}) => {
                 </motion.p>
                 <motion.div
                     variants={{
-                        hide: { opacity: 0, display: 'none' },
-                        show: { opacity: 1, display: 'block' }
+                        hide: { opacity: 0 },
+                        show: { opacity: 1, display: 'block', transition: {delay: 0.5} }
                     }}
-                    transition={{duration: 0.5, staggerChildren: 0.5}}
+                    
                     className={styles.contentsWrapper}
+                    style={{
+                        display: showContents ? 'block' : setTimeout(() => 'none', 500)
+                    }}
                 >
                     <h5>contents</h5>
                     {tiles.map((tile, i ) => 

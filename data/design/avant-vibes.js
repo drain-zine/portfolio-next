@@ -3,6 +3,10 @@ import AVArchive from '../../src/assets/AvantVibes/AVArchive.png';
 import AVLinks from '../../src/assets/AvantVibes/AVLinks.png';
 import SupremeMain from '../../src/assets/AvantVibes/SupremeMain2.png';
 import SupremeAbout from '../../src/assets/AvantVibes/SupremeAbout2.png';
+import text1 from '../markdown/avant-vibes/av1.md';
+import text2 from '../markdown/avant-vibes/av2.md';
+import text3 from '../markdown/avant-vibes/av3.md';
+import text4 from '../markdown/avant-vibes/av4.md';
 
 export const data = {
     "tile": {
@@ -32,8 +36,8 @@ export const data = {
                     "title": "Process",
                     "subtitle": "digital Inspiration",
                     "text": [
-                        "The Avant Vibes webpage took two design cues from seemingly disparate design philosophies. The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme.\nHere the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.",
-                        "In contrast, the second major design cue was from archaic web design practices, notably the use of tables and loud graphics which became popular in the late 90s and early to mid 00s.\nOne could posit that the popularity of this style was due to the explosion of the web in the early 2000s. With the rise of web development as a profession, as well as software like adobe flash, a growing toolkit was available to designers and amateurs alike. This led to a proliferation of website templates and royalty free assets leading to heavy use of standarised tabular layouts featuring and dynamic elements such as gifs and animations."
+                        text1,
+                        text2,
                     ]
                 }, {
                     "meta": {
@@ -65,8 +69,8 @@ export const data = {
                         }
                     },
                     "text": [
-                        "The Avant Vibes webpage took two design cues from seemingly disparate design philosophies. The general layout and arguably main theme of the site was minimalism, as utilised by retail sites such as Supreme. Here the web designer has opted for a simple, high contrast colour scheme of black, white and red as well as saturated monochrome background photo. This makes the site highly readable, and when paired with the simple layout of the site it draws the viewer’s attention to the text content or photo content of the products. One could also draw the connection to this style of design to the physical retail location’s layout schema, opting for a simple uncrowded space where the products themselves are emphasized by the surronding negative spaces.",
-                        "In contrast, the second major design cue was from archaic web design practices, notably the use of tables and loud graphics which became popular in the late 90s and early to mid 00s.\nOne could posit that the popularity of this style was due to the explosion of the web in the early 2000s. With the rise of web development as a profession, as well as software like adobe flash, a growing toolkit was available to designers and amateurs alike. This led to a proliferation of website templates and royalty free assets leading to heavy use of standarised tabular layouts featuring and dynamic elements such as gifs and animations."
+                        text3,
+                        text4
                     ]
                 }, {
                     "meta": {

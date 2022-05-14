@@ -10,8 +10,8 @@ import TextBox from '../../components/TextBox/TextBox';
 import CentralImage from '../../components/CentralImage/CentralImage';
 import HalfPageImage from '../../components/HalfPageImage/HalfPageImage';
 import Nav from '../../components/Nav/Nav';
-import { EdgesGeometry } from 'three';
-//import fs from "fs";
+import ReactMarkdown from 'react-markdown';
+import Link from 'next/link';
 
 
 const TypeMap = {
@@ -20,7 +20,7 @@ const TypeMap = {
     CentralImage
 };
 
-const EntryPage = ({ page }) => {
+const EntryPage = ({ page, nextEntry, prevEntry }) => {
     const header = page.header;
 
     const mainRef = useRef(null);
@@ -51,7 +51,7 @@ const EntryPage = ({ page }) => {
     return(
         <main ref={mainRef} className={styles.main}>
             <div className={styles.nav}>
-                <Nav/>
+                <Nav color={'black'}/>
                 <p>{rotateState.toFixed(2)}</p>
             </div>
 
@@ -94,7 +94,7 @@ const EntryPage = ({ page }) => {
                                         );
                                     }
 
-                                    children.push(el.text.map(t => <div>{t}</div>));
+                                    children.push(el.text.map(t => <div className={styles.markdown}><ReactMarkdown>{t}</ReactMarkdown></div>));
                                 }
 
                                 return React.createElement(
@@ -111,7 +111,19 @@ const EntryPage = ({ page }) => {
             </section>
             <section className={styles.footer}>
                         <div className={styles.footerContent}>
-                            
+                            <h3>Next</h3>
+                            <div className={styles.footerNav}>
+                                {prevEntry ? <Link href={prevEntry.link}>
+                                    <div>
+                                        <h4>{prevEntry.title}</h4>
+                                    </div>
+                                </Link> : <div/> }
+                                { nextEntry ? <Link href={nextEntry.link}>
+                                    <div>
+                                        <h4>{nextEntry.title}</h4>
+                                    </div>
+                                </Link> : <div /> }
+                            </div>
                         </div>
             </section>
         </main>
@@ -122,10 +134,10 @@ export async function getStaticPaths(){
     // pretend we have an API
     const entries = process.env.paths;
 
-    const paths = entries.map(entry => ({
-        params: {
-            entryId: entry.split('.')[0]
-        }
+    const paths = entries.map((entry, i) => ({
+            params: {
+                entryId: entry.split('.')[0]
+            }
     }));
 
     return {
@@ -136,12 +148,40 @@ export async function getStaticPaths(){
 
 export async function getStaticProps({ params }){
     const entryId = params.entryId;
+    const entries = process.env.paths;
+    const i = entries.indexOf(entryId + '.js');
+    const n = entries.length;
+
+    console.log(i);
+
+    let nextEntry = null;
+    let prevEntry = null;
+
+
 
     const { data } = require('../../../data/design/' + entryId + '.js');
+
+    if(i <  (n - 1)){
+        const { data: nextEntryData} =  require('../../../data/design/' + entries[i+1]);
+        nextEntry = {
+            title: nextEntryData.tile.title,
+            link: `/design/${entries[i+1].split('.')[0]}`
+        }
+    }
+
+    if(i > 0){
+        const { data: prevEntryData} =  require('../../../data/design/' + entries[i-1]);
+        prevEntry = {
+            title: prevEntryData.tile.title,
+            link: `/design/${entries[i-1].split('.')[0]}`
+        }
+    }
     
     return {
         props: {
-            page: data.page
+            page: data.page,
+            nextEntry,
+            prevEntry
         }
     }
 };

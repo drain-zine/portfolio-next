@@ -290,6 +290,40 @@ $tileSpacer: 11rem;
         height: 50vh;
         width: 100%;
         background-color: black;
+        position: relative;
+
+        h3{
+            color: black;
+            font-size: 4rem;
+            transform: translate(0%,calc(-100% - 1rem));
+            left: calc(15% + 1rem);
+            margin: 0;
+            position: absolute;
+        }
+
+        .footerNav{
+            margin: 0 15%;
+            width: 70%;
+            position: relative;
+            display: flex;
+            height: 50vh;
+
+            div{
+                width: 50%;
+                height: 50vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                cursor: pointer;
+
+                h4{
+                    font-size: 2rem;
+                }
+
+
+            }
+        }
     }
 }
 
@@ -303,4 +337,10 @@ $tileSpacer: 11rem;
     background: black;
     height: 0.125rem;
     width: 50%;
+}
+
+.markdown{
+    p:first-child{
+        margin-top: 0;
+    }
 }
